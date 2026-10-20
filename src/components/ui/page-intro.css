@@ -1,0 +1,84 @@
+.page-intro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: 52px;
+  color: white;
+  background: radial-gradient(ellipse at 88% 100%, #084273, var(--navy) 70%);
+  border-bottom: 1px solid #00a8ff60;
+}
+.page-intro:before {
+  content: "";
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border: 1px solid #39adfa30;
+  border-radius: 50%;
+  right: -120px;
+  top: -220px;
+  box-shadow:
+    0 0 0 28px #006ce808,
+    0 0 0 80px #006ce808;
+  pointer-events: none;
+  z-index: -1;
+}
+.page-intro:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--electric),
+    var(--orange)
+  );
+}
+.page-intro h1 {
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  max-width: 850px;
+  margin-bottom: 18px;
+}
+.page-intro p:not(.eyebrow) {
+  color: #b3cce3;
+  font-size: 0.92rem;
+  max-width: 650px;
+  margin-bottom: 0;
+}
+.page-intro .eyebrow {
+  color: #b2d9f6;
+}
+[data-page="programas"] .page-intro {
+  background:
+    linear-gradient(90deg, #031020f5, #03102099),
+    url("/assets/editorial/program-v2.webp") center 40% / cover;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+}
+[data-page="radio"] .page-intro,
+[data-page="tv"] .page-intro {
+  padding-block: 40px;
+}
+[data-page="institucional"] .page-intro h1 {
+  max-width: 650px;
+}
+[data-page="historia-do-radio"] .page-intro {
+  background: radial-gradient(ellipse at 90% 80%, #3d342e, var(--navy) 75%);
+}
+@media (max-width: 600px) {
+  .page-intro {
+    padding-block: 36px;
+  }
+  .page-intro h1 {
+    font-size: 2.65rem;
+  }
+  .page-intro p:not(.eyebrow) {
+    font-size: 0.85rem;
+  }
+  [data-page="programas"] .page-intro {
+    min-height: 270px;
+  }
+}

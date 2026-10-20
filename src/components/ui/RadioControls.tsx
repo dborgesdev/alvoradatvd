@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { useId } from "react";
 import { useRadio } from "../../hooks/useRadio";
+import { Waveform } from "./Waveform";
+import "./radio.css";
 export function RadioControls({ compact = false }: { compact?: boolean }) {
   const { status, toggle, volume, setVolume, available, isDemo } = useRadio();
   const id = useId();
@@ -24,7 +26,12 @@ export function RadioControls({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`radio-controls ${compact ? "compact" : ""}`}>
       <div className="radio-identity">
-        <img src="/assets/brand/logo-alvorada.png" alt="" />
+        <img
+          src="/assets/brand/logo-3d-small.webp"
+          alt=""
+          width="128"
+          height="128"
+        />
         <div>
           <strong>Rádio Alvorada</strong>
           <span className="radio-mode">
@@ -46,6 +53,7 @@ export function RadioControls({ compact = false }: { compact?: boolean }) {
           <Play fill="currentColor" />
         )}
       </button>
+      <Waveform />
       <div className="radio-state">
         <Radio size={15} />
         <span role="status">{labels[status]}</span>
@@ -64,6 +72,7 @@ export function RadioControls({ compact = false }: { compact?: boolean }) {
           value={volume}
           onChange={(event) => setVolume(Number(event.target.value))}
         />
+        <output htmlFor={id}>{Math.round(volume * 100)}%</output>
       </label>
     </div>
   );

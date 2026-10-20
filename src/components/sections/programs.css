@@ -1,0 +1,127 @@
+.program-feature {
+  position: relative;
+  isolation: isolate;
+  min-height: 340px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--navy);
+  box-shadow: var(--shadow);
+  color: white;
+}
+.program-feature:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #031020 0%, #031020b0 35%, transparent 90%);
+  z-index: -1;
+}
+.program-feature > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  transition: transform 0.5s;
+}
+.program-feature:hover > img {
+  transform: scale(1.03);
+}
+.program-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  min-height: 340px;
+  padding: 30px;
+  align-items: start;
+}
+.program-overlay h3 {
+  margin: 16px 0 10px;
+  font-size: 2rem;
+}
+.program-overlay p {
+  max-width: 400px;
+  font-size: 0.8rem;
+  color: #c1d6eb;
+}
+.program-overlay .image-caption {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+}
+.program-overlay iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 0;
+}
+.youtube-panel {
+  align-self: stretch;
+  padding: 30px;
+  border: 1px solid #d8e4f0;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px #006ce805;
+}
+.youtube-panel > svg {
+  color: #dc1f26;
+  width: 33px;
+  margin-bottom: 12px;
+}
+.youtube-panel h3 {
+  font-size: 1.7rem;
+  line-height: 1.13;
+  margin-bottom: 13px;
+}
+.youtube-panel > p:not(.eyebrow) {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.youtube-panel .eyebrow {
+  font-size: 0.6rem;
+}
+.youtube-panel .button {
+  font-size: 0.73rem;
+}
+.programs-full .program-feature,
+.programs-full .program-overlay {
+  min-height: 440px;
+}
+.programs-full .program-overlay h3 {
+  font-size: 2.6rem;
+}
+@media (max-width: 1023px) {
+  .program-grid {
+    grid-template-columns: 1.4fr 1fr;
+  }
+  .youtube-panel {
+    padding: 25px;
+  }
+  .youtube-panel h3 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 650px) {
+  .program-grid {
+    grid-template-columns: 1fr;
+  }
+  .program-feature,
+  .program-overlay {
+    min-height: 330px;
+  }
+  .program-overlay {
+    padding: 25px;
+  }
+  .youtube-panel {
+    padding: 28px;
+  }
+  .youtube-panel h3 {
+    font-size: 1.9rem;
+  }
+  .youtube-panel h3 br {
+    display: none;
+  }
+  .programs-full .program-feature,
+  .programs-full .program-overlay {
+    min-height: 380px;
+  }
+}

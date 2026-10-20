@@ -3,17 +3,16 @@ import { TvPlayer } from "../ui/TvPlayer";
 export function TvPlayerSection() {
   return (
     <section className="section container player-layout">
-      <TvPlayer />{" "}
+      <TvPlayer autoPlay />{" "}
       <aside className="player-info">
         <p className="eyebrow">TV DIGITAL</p>
         <h2>
-          Em todas
-          <br />
+          Em todas <br />
           as suas telas.
         </h2>
         <p>
-          Acompanhe com os controles do player. O áudio começa apenas quando
-          você inicia a reprodução.
+          A transmissão tenta iniciar automaticamente sem som. Ative o áudio
+          quando quiser, pelos controles do player.
         </p>
         <p className="section-note">
           A disponibilidade depende do serviço de transmissão da Taaqui. Se o

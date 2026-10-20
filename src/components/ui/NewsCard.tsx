@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { NewsArticle } from "../../types/content";
+import "../sections/editorial.css";
 export function NewsCard({
   article,
   featured = false,
@@ -10,7 +11,11 @@ export function NewsCard({
 }) {
   return (
     <article className={`news-card ${featured ? "featured" : ""}`}>
-      <Link to={`/noticias/${article.slug}`} className="image-link" aria-label={`Ler: ${article.title} — conteúdo demonstrativo`}>
+      <Link
+        to={`/noticias/${article.slug}`}
+        className="image-link"
+        aria-label={`Ler: ${article.title} — conteúdo demonstrativo`}
+      >
         <img src={article.image} alt="" loading="lazy" />
         <span className="image-caption">Imagem conceitual</span>
       </Link>

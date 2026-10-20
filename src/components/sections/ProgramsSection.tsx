@@ -1,16 +1,19 @@
 import { Play, ArrowUpRight } from "lucide-react";
 import { content } from "../../lib/content";
 import { SectionHeading } from "../ui/SectionHeading";
+import "./programs.css";
 export function ProgramsSection({ full = false }: { full?: boolean }) {
   return (
-    <section className="section container">
+    <section
+      className={`section container programs-section ${full ? "programs-full" : ""}`}
+    >
       <SectionHeading
         eyebrow="PLAY NA CONEXÃO"
         title="A Alvorada no seu tempo."
         to={full ? undefined : "/programas"}
         linkLabel="Programas e vídeos"
       />
-      <div className="program-grid">
+      <div className="program-grid grid gap-6 lg:grid-cols-[1.7fr_1fr]">
         {content.getPrograms().map((program) => (
           <article className="program-feature" key={program.id}>
             <img
@@ -38,10 +41,8 @@ export function ProgramsSection({ full = false }: { full?: boolean }) {
           <Play size={40} />
           <p className="eyebrow">CANAL OFICIAL</p>
           <h3>
-            Boas conversas.
-            <br />
-            Novas perspectivas.
-            <br />
+            Boas conversas. <br />
+            Novas perspectivas. <br />
             Aperte o play.
           </h3>
           <p>Acompanhe os conteúdos publicados pela emissora no YouTube.</p>

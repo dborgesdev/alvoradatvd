@@ -1,5 +1,11 @@
 export const navigation = [
- ['/', 'Início'], ['/noticias', 'Notícias'], ['/programas', 'Programas'], ['/tv', 'TV ao vivo'], ['/radio', 'Rádio'], ['/institucional', 'Sobre'], ['/contato', 'Contato'],
+ ['/', 'Início'], ['/noticias', 'Notícias'], ['/programas', 'Programas'], ['/tv', 'TV ao vivo'], ['/radio', 'Rádio'], ['/institucional', 'Institucional'], ['/contato', 'Contato'],
+] as const;
+export const institutionalNavigation = [
+ ['/institucional', 'Sobre'],
+ ['/historia-do-radio', 'História do Rádio'],
+ ['/promocoes', 'Promoções'],
+ ['/equipe', 'Equipe'],
 ] as const;
 export const institutionalDetails = {
  proposal: 'Uma comunicação solidária, cultural e informativa, com entretenimento e utilidade pública em linguagem acessível. A proposta da Rede Alvorada valoriza a identidade cultural e a participação da comunidade.',

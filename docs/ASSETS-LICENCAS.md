@@ -1,5 +1,13 @@
 # Origem dos assets adicionados nos refinamentos
 
+## Redesign V2
+
+- `public/assets/brand/logo-3d-original.png`: marca original fornecida pelo cliente, preservada. O PNG já contém alpha (572.063 pixels totalmente transparentes de 1.572.516); não foi necessário remover fundo, redesenhar ou reconstruir brilhos. Derivados `logo-3d-hero.webp` (640 px, qualidade 92, alpha 100) e `logo-3d-small.webp` (128 px, lossless) foram redimensionados a partir desse original. Favicon e assinatura compacta existentes foram preservados para legibilidade.
+- `public/assets/editorial/region-v2.webp`: imagem conceitual gerada por IA, cidade brasileira genérica ao pôr do sol. Não representa Hortolândia nem um local confirmado.
+- `public/assets/editorial/sport-v2.webp`: imagem conceitual gerada por IA, bola em campo genérico com luz noturna. Não representa clube, evento ou atleta da emissora.
+- `public/assets/editorial/program-v2.webp`: imagem conceitual gerada por IA, microfone e câmera em estúdio vazio. Não representa instalações ou programas confirmados.
+- As três imagens foram criadas individualmente com a ferramenta integrada imagegen, exportadas para WebP e usadas em slots independentes. Prompts e validações constam em `docs/REDESIGN-V2-ENTREGA.md`. O mockup aprovado não foi incorporado ao site nem fatiado.
+
 ## Áudio demonstrativo
 
 - Arquivo fornecido pelo cliente: `public/assets/audio/radio-demo.mp3`.

@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { content } from "../../lib/content";
+import "./about.css";
 export function AboutSection() {
   return (
     <section className="about-section section">
-      <div className="container about-grid">
+      <div className="container about-grid grid gap-10 lg:grid-cols-[.8fr_1.1fr_.8fr]">
         <div>
           <p className="eyebrow">MUITO ALÉM DO SINAL</p>
           <h2>
@@ -25,6 +26,16 @@ export function AboutSection() {
             Conheça a nossa essência <ArrowUpRight size={19} />
           </Link>
         </div>
+        <figure className="about-art">
+          <img
+            src="/assets/editorial/studio-conceitual.webp"
+            alt="Conceito visual de produção audiovisual, não representa a sede"
+            loading="lazy"
+            width="800"
+            height="450"
+          />
+          <figcaption>Imagem conceitual</figcaption>
+        </figure>
       </div>
     </section>
   );

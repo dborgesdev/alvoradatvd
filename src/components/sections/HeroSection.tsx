@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Play, ArrowUpRight, Radio } from "lucide-react";
 import { TvPlayer } from "../ui/TvPlayer";
+import "./hero.css";
 export function HeroSection() {
   return (
     <section className="hero hero-with-tv">
@@ -13,6 +14,13 @@ export function HeroSection() {
       <div className="hero-shade" />
       <div className="container hero-content">
         <div className="hero-copy">
+          <img
+            className="hero-brand-art"
+            src="/assets/brand/logo-3d-hero.webp"
+            alt=""
+            width="640"
+            height="640"
+          />
           <div className="hero-topline">
             <span className="signal-dot" /> UMA NOVA FORMA DE SE CONECTAR
           </div>
@@ -43,8 +51,13 @@ export function HeroSection() {
         </div>
         <div className="hero-tv">
           <div className="hero-tv-heading">
-            <span className="signal-dot" /> ALVORADA TV{" "}
-            <span>TRANSMISSÃO DIGITAL</span>
+            <img
+              src="/assets/brand/logo-alvorada.png"
+              alt=""
+              width="24"
+              height="24"
+            />{" "}
+            ALVORADA TV <span>TRANSMISSÃO DIGITAL</span>
           </div>
           <TvPlayer autoPlay />
           <p className="hero-tv-note">
