@@ -1,0 +1,128 @@
+.about-section {
+  background: linear-gradient(115deg, #e8f1fb, #f4f8fd);
+  border-top: 1px solid #dce7f1;
+}
+.about-grid {
+  align-items: center;
+}
+.about-grid h2 {
+  font-size: 2.55rem;
+  margin: 0;
+}
+.about-grid h2 span {
+  color: #0062d5;
+}
+.about-grid p:not(.eyebrow) {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.about-grid .large-copy {
+  font-size: 0.9rem;
+}
+.about-art {
+  margin: 0;
+  position: relative;
+  border-radius: 45px 8px 45px 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 35px #052d5720;
+}
+.about-art img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+.about-art figcaption {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.55rem;
+  padding: 4px 7px;
+  background: #031020d0;
+  color: white;
+  border-radius: 3px;
+}
+.contact-cta {
+  background: linear-gradient(110deg, #ff9d19, #ff8709);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.contact-cta > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding-block: 40px;
+  position: relative;
+}
+.contact-cta h2 {
+  font-size: 2rem;
+  max-width: 450px;
+  margin: 0;
+}
+.contact-cta .eyebrow {
+  font-size: 0.6rem;
+}
+.contact-cta .eyebrow:before {
+  background: var(--navy);
+}
+.contact-cta .button {
+  margin-right: 16%;
+}
+.cta-brand-art {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  right: -140px;
+  top: -90px;
+  object-fit: contain;
+  opacity: 0.9;
+  z-index: -1;
+}
+.contact-cta .dark {
+  box-shadow: 0 10px 25px #7a3b1435;
+}
+@media (max-width: 1023px) {
+  .about-grid {
+    grid-template-columns: 1fr 1.2fr;
+  }
+  .about-art {
+    grid-column: 1/-1;
+  }
+  .about-art img {
+    height: 180px;
+    object-position: center 60%;
+  }
+  .contact-cta .button {
+    margin-right: 0;
+  }
+  .cta-brand-art {
+    opacity: 0.25;
+  }
+}
+@media (max-width: 650px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-grid h2 {
+    font-size: 2.35rem;
+  }
+  .about-art {
+    grid-column: auto;
+  }
+  .about-grid .large-copy {
+    font-size: 0.95rem;
+  }
+  .contact-cta > .container {
+    align-items: start;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .contact-cta h2 {
+    font-size: 2rem;
+  }
+  .cta-brand-art {
+    right: -150px;
+    opacity: 0.3;
+  }
+}

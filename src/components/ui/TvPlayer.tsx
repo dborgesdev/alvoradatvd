@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { content } from "../../lib/content";
 import { useTvPlayer } from "../../hooks/useTvPlayer";
+import "./tv.css";
 export function TvPlayer({ autoPlay = false }: { autoPlay?: boolean }) {
   const { ref, status, failure, start } = useTvPlayer(
     content.streams.tv.hlsUrl,
@@ -76,7 +77,7 @@ export function TvPlayer({ autoPlay = false }: { autoPlay?: boolean }) {
               ) : (
                 <Play size={18} />
               )}{" "}
-              {status === "error" ? "Tentar novamente" : "Carregar transmissão"}
+              Carregar transmissão
             </button>
           </div>
         )}

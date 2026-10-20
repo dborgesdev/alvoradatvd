@@ -22,9 +22,13 @@ export function Footer() {
             <div className="social-links">
               {[
                 { url: site.social.youtube, Icon: Play, label: "YouTube" },
-                { url: site.social.instagram, Icon: Camera, label: "Instagram" },
+                {
+                  url: site.social.instagram,
+                  Icon: Camera,
+                  label: "Instagram",
+                },
                 { url: site.social.facebook, Icon: Users, label: "Facebook" },
-              ].map(({url, Icon, label}) => {
+              ].map(({ url, Icon, label }) => {
                 return (
                   <a
                     key={url}
@@ -52,7 +56,7 @@ export function Footer() {
               {label}
             </Link>
           ))}
-          <span>Prévia V1 · Conteúdo editorial demonstrativo</span>
+          <span>Prévia V2 · Conteúdo editorial demonstrativo</span>
         </div>
         <div className="container footer-bottom">
           <span>

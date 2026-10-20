@@ -38,7 +38,7 @@ export default function ArticlePage() {
       <div className="article-body">
         <aside className="demo-notice">
           Conteúdo demonstrativo. Este artigo apresenta a experiência de leitura
-          da V1 e não é uma notícia real.
+          do portal e não é uma notícia real.
         </aside>
         {article.body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
