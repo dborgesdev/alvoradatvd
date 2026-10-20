@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.env*
+!.env.example
+qa/
+.wrangler/
+*.log
+
+# Materiais locais usados na construção e avaliação.
+docs/*
+!docs/ASSETS-LICENCAS.md
+!docs/institucional-fonte.txt
+public/assets/brand/Portal de Notícias Rede Alvorada.png
+public/assets/brand/logo-alvorada-alternativo-original.jpg
+public/assets/brand/logo-alvorada-512.png
