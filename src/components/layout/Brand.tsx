@@ -4,7 +4,7 @@ export function Brand({ lazy = false }: { lazy?: boolean }) {
   return (
     <Link to="/" aria-label="Rede Alvorada, início" className="brand">
       <img
-        src="/assets/brand/logo-alvorada.png"
+        src="/assets/brand/logo-alvorada.webp"
         alt=""
         loading={lazy ? "lazy" : "eager"}
       />
