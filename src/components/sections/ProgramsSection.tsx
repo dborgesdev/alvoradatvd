@@ -22,7 +22,6 @@ export function ProgramsSection({ full = false }: { full?: boolean }) {
               loading="lazy"
             />
             <div className="program-overlay">
-              <span className="demo-badge">Conteúdo demonstrativo</span>
               <h3>{program.title}</h3>
               <p>{program.description}</p>
               {program.youtubeVideoId && (
@@ -33,7 +32,6 @@ export function ProgramsSection({ full = false }: { full?: boolean }) {
                   allowFullScreen
                 />
               )}
-              <span className="image-caption">Imagem conceitual</span>
             </div>
           </article>
         ))}

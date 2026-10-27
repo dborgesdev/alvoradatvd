@@ -18,7 +18,6 @@ export default function ArticlePage() {
       <header>
         <div className="article-meta">
           <span>{article.category}</span>
-          <span>Conteúdo demonstrativo</span>
         </div>
         <h1>{article.title}</h1>
         <p className="article-lead">{article.excerpt}</p>
@@ -31,15 +30,8 @@ export default function ArticlePage() {
           src={article.image}
           alt="Imagem conceitual para demonstração do layout editorial"
         />
-        <figcaption>
-          Imagem conceitual. Não retrata um acontecimento ou local confirmado.
-        </figcaption>
       </figure>
       <div className="article-body">
-        <aside className="demo-notice">
-          Conteúdo demonstrativo. Este artigo apresenta a experiência de leitura
-          do portal e não é uma notícia real.
-        </aside>
         {article.body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}

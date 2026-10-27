@@ -1,9 +1,18 @@
 {
   "name": "alvoradatvd",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-10-20",
   "workers_dev": true,
   "assets": {
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"],
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
-  }
+    "not_found_handling": "single-page-application",
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "EDITORIAL_CACHE", "class_name": "EditorialCache" }],
+  },
+  "migrations": [
+    { "tag": "v1-editorial-cache", "new_sqlite_classes": ["EditorialCache"] },
+  ],
 }

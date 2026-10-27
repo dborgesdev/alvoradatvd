@@ -4,6 +4,7 @@ import { Menu, X, Radio, ArrowUpRight } from "lucide-react";
 import { navigation } from "../../data/content/editorial";
 import { Brand } from "./Brand";
 import { InstitutionalMenu } from "./InstitutionalMenu";
+import { UtilityBar } from "./UtilityBar";
 export function Header() {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -18,15 +19,7 @@ export function Header() {
         }
       }}
     >
-      <div className="utility">
-        <div className="container">
-          <span>
-            HORTOLÂNDIA, SP <span className="utility-divider">/</span> CONECTADA
-            COM VOCÊ
-          </span>
-          <span>Rádio · TV · Jornal digital</span>
-        </div>
-      </div>
+      <UtilityBar />
       <div className="container header-main">
         <Brand />
         <nav className="desktop-nav" aria-label="Navegação principal">

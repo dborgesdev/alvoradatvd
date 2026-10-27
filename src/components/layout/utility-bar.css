@@ -1,0 +1,348 @@
+.site-header .utility-bar {
+  background: linear-gradient(110deg, #09213c, #06172b 65%, #0b2540);
+}
+.site-header .utility-bar > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 76px;
+  padding-block: 12px;
+  font-size: 13px;
+  letter-spacing: 0;
+}
+.utility-brand-group,
+.utility-services {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-width: 0;
+}
+.utility-brand-group {
+  gap: 12px;
+}
+.utility-eyebrow {
+  color: #b4c9dd;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+.utility-social {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.utility-social a,
+.utility-apps a,
+.utility-app-pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #7baddb26;
+  border-radius: 11px;
+  background: #163a5b80;
+  color: #e3effa;
+  flex-shrink: 0;
+}
+.utility-social a,
+.utility-apps a {
+  transition:
+    color 200ms,
+    border-color 200ms,
+    background-color 200ms,
+    transform 200ms;
+}
+.utility-social a:hover,
+.utility-apps a:hover {
+  color: #ffb454;
+  border-color: #ff9c3c80;
+  background: #214563;
+  transform: translateY(-2px);
+}
+.utility-social a:focus-visible,
+.utility-apps a:focus-visible {
+  outline: 2px solid #ffb454;
+  outline-offset: 3px;
+}
+.utility-social svg {
+  width: 21px;
+  height: 21px;
+}
+.utility-apps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-left: 1px solid #688bad45;
+  padding-left: 16px;
+}
+.utility-app-caption {
+  margin-right: 3px;
+}
+.utility-app-caption small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-top: 4px;
+  color: #adc0d3;
+}
+.utility-apps a,
+.utility-app-pending {
+  gap: 5px;
+  width: auto;
+  padding-inline: 9px;
+  font-size: 10px;
+}
+.utility-apps svg {
+  width: 19px;
+  height: 19px;
+}
+.utility-app-pending {
+  background: #102c48;
+  color: #aec3d8;
+  border-color: #7896b125;
+}
+.utility-clock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid #688bad45;
+  padding-left: 24px;
+  white-space: nowrap;
+  color: #d0deeb;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+.utility-clock > svg {
+  width: 20px;
+  height: 20px;
+  color: #ffb454;
+}
+.utility-clock-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.utility-clock-date {
+  font-size: 11px;
+}
+.utility-clock strong {
+  font-size: 23px;
+  font-weight: 650;
+  letter-spacing: 0.035em;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+.utility-weather {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #bfd4e8;
+  white-space: nowrap;
+  font-size: 12px;
+}
+.utility-weather > svg {
+  width: 27px;
+  height: 27px;
+  color: #ffb454;
+}
+.utility-weather-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.utility-weather strong {
+  font-size: 24px;
+  font-weight: 650;
+  color: white;
+  font-variant-numeric: tabular-nums;
+}
+.weather-condition {
+  color: #98b2ca;
+  font-size: 10px;
+}
+.utility-rates {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-left: 1px solid #688bad45;
+  padding-left: 20px;
+  white-space: nowrap;
+}
+.utility-rates > span + span {
+  border-left: 1px solid #688bad45;
+  padding-left: 14px;
+}
+.utility-rates strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #edf4fb;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 1400px) {
+  .connect-label,
+  .utility-app-caption {
+    display: none;
+  }
+  .utility-brand-group,
+  .utility-services {
+    gap: 14px;
+  }
+  .site-header .utility-bar > .container {
+    gap: 18px;
+  }
+}
+@media (max-width: 1150px) {
+  .utility-services {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .utility-rates {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .utility-app-caption {
+    display: inline;
+  }
+}
+@media (max-width: 950px) {
+  .utility-apps {
+    display: none;
+  }
+  .utility-app-caption {
+    display: none;
+  }
+  .utility-clock {
+    padding-left: 16px;
+    gap: 8px;
+  }
+  .utility-weather-copy {
+    font-size: 11px;
+  }
+  .utility-apps a,
+  .utility-app-pending {
+    padding-inline: 7px;
+  }
+}
+@media (max-width: 760px) {
+  .site-header .utility-bar > .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 12px;
+    min-height: 0;
+    padding-block: 10px;
+  }
+  .utility-brand-group {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .utility-services {
+    display: contents;
+  }
+  .utility-services:empty {
+    display: none;
+  }
+  .utility-apps {
+    display: none;
+  }
+  .utility-weather {
+    gap: 7px;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+  .utility-rates {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: center;
+    border-top: 1px solid #688bad30;
+    padding-top: 8px;
+  }
+  .utility-weather > svg {
+    width: 23px;
+    height: 23px;
+  }
+  .utility-weather strong {
+    font-size: 21px;
+  }
+  .weather-condition {
+    display: none;
+  }
+  .utility-clock {
+    grid-column: 1/-1;
+    grid-row: 3;
+    border-left: 0;
+    border-top: 1px solid #688bad30;
+    padding: 8px 0 0;
+    justify-content: center;
+    gap: 9px;
+  }
+  .utility-clock-copy {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+  .utility-clock-date {
+    font-size: 11px;
+  }
+  .utility-clock strong {
+    font-size: 17px;
+  }
+  .utility-clock > svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+@media (max-width: 360px) {
+  .utility-weather-copy {
+    font-size: 10px;
+  }
+  .utility-weather {
+    display: grid;
+    grid-template-columns: 19px auto;
+    gap: 1px 6px;
+  }
+  .utility-weather > svg {
+    width: 19px;
+    height: 19px;
+    grid-row: 1 / 3;
+  }
+  .utility-weather-copy,
+  .utility-weather strong {
+    grid-column: 2;
+  }
+  .utility-weather strong {
+    font-size: 18px;
+  }
+  .utility-clock-copy {
+    gap: 8px;
+  }
+  .utility-clock-date {
+    font-size: 10px;
+  }
+  .utility-clock strong {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .utility-social a,
+  .utility-apps a {
+    transition: none;
+  }
+  .utility-social a:hover,
+  .utility-apps a:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .utility-weather {
+    display: none;
+  }
+  .utility-brand-group {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}

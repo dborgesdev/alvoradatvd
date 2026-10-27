@@ -1,0 +1,4 @@
+# Apenas avaliação local. Não usar a API gratuita em produção comercial.
+WEATHER_EVALUATION=true
+# Em uso comercial, remover WEATHER_EVALUATION e fornecer a chave via segredo Cloudflare.
+# OPEN_METEO_API_KEY=

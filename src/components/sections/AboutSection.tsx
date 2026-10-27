@@ -34,7 +34,6 @@ export function AboutSection() {
             width="800"
             height="450"
           />
-          <figcaption>Imagem conceitual</figcaption>
         </figure>
       </div>
     </section>

@@ -45,9 +45,6 @@ export function HeroSection() {
               <Radio size={19} /> Ouvir a rádio
             </Link>
           </div>
-          <span className="hero-note">
-            Imagem conceitual · não representa as instalações da emissora
-          </span>
         </div>
         <div className="hero-tv">
           <div className="hero-tv-heading">

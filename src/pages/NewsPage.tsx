@@ -4,14 +4,14 @@ import { NewsListingSection } from "../components/sections/NewsListingSection";
 export default function NewsPage() {
   usePageMeta(
     "Notícias",
-    "Explore a prévia editorial do portal Rede Alvorada. Conteúdos demonstrativos identificados.",
+    "Notícias do G1 Campinas e Região, com acesso direto às matérias originais.",
   );
   return (
     <>
       <PageIntro
         eyebrow="JORNAL DIGITAL"
         title="A região em perspectiva."
-        description="Informação que aproxima. Explore os conteúdos demonstrativos desta prévia editorial."
+        description="Uma seleção das últimas notícias do G1 Campinas e Região. Leia cada matéria completa no portal de origem."
       />
       <NewsListingSection />
     </>

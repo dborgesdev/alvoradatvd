@@ -11,7 +11,6 @@ export function SportsSection() {
             loading="lazy"
             alt="Ilustração conceitual de esporte em campo"
           />
-          <span className="image-caption">Imagem conceitual</span>
         </div>
         <div className="sports-copy">
           <p className="eyebrow">ESPORTE QUE INSPIRA</p>
@@ -24,7 +23,7 @@ export function SportsSection() {
             dos objetivos da Rede Alvorada. Um espaço para aproximar a
             comunidade das suas histórias.
           </p>
-          <Link to="/noticias?categoria=Esportes" className="button orange">
+          <Link to="/noticias?busca=esporte" className="button orange">
             Explore o espaço de esportes <ArrowUpRight size={18} />
           </Link>
         </div>

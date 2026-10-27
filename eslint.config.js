@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 import hooks from "eslint-plugin-react-hooks";
 import refresh from "eslint-plugin-react-refresh";
 export default tseslint.config(
-  { ignores: ["dist", "node_modules", "qa"] },
+  { ignores: ["dist", "node_modules", "qa", ".wrangler"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -12,7 +12,7 @@ export default tseslint.config(
     languageOptions: { globals: globals.node },
   },
   {
-    files: ["src/**/*.{ts,tsx}"],
+    files: ["src/**/*.{ts,tsx}", "worker/**/*.ts"],
     languageOptions: { globals: globals.browser },
     plugins: { "react-hooks": hooks, "react-refresh": refresh },
     rules: {

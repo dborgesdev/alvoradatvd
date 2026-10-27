@@ -17,12 +17,10 @@ export function NewsCard({
         aria-label={`Ler: ${article.title} — conteúdo demonstrativo`}
       >
         <img src={article.image} alt="" loading="lazy" />
-        <span className="image-caption">Imagem conceitual</span>
       </Link>
       <div className="news-copy">
         <div className="article-meta">
           <span>{article.category}</span>
-          <span>Conteúdo demonstrativo</span>
         </div>
         <h3>
           <Link to={`/noticias/${article.slug}`}>{article.title}</Link>
