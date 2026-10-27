@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import routePolicy from "../data/content/route-policy.json";
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
     document.title = `${title} | Rede Alvorada`;
@@ -15,20 +16,29 @@ export function usePageMeta(title: string, description: string) {
     };
     const origin = import.meta.env.VITE_PUBLIC_SITE_URL;
     const indexable =
-      origin &&
-      ["/", "/tv", "/institucional", "/historia-do-radio", "/contato"].includes(
-        window.location.pathname,
-      );
+      Boolean(origin) &&
+      routePolicy.indexable.includes(window.location.pathname);
     setMeta("description", description);
     setMeta("og:title", document.title, true);
     setMeta("og:description", description, true);
     setMeta("og:type", "website", true);
+    setMeta(
+      "og:image",
+      new URL("/assets/brand/og-alvorada.svg", origin || window.location.origin)
+        .href,
+      true,
+    );
+    setMeta("twitter:title", document.title);
+    setMeta("twitter:description", description);
     setMeta("robots", indexable ? "index,follow" : "noindex,nofollow");
     document.head.querySelector('link[rel="canonical"]')?.remove();
-    if (origin) {
+    {
       const canonical = document.createElement("link");
       canonical.rel = "canonical";
-      canonical.href = new URL(window.location.pathname, origin).href;
+      canonical.href = new URL(
+        window.location.pathname,
+        origin || window.location.origin,
+      ).href;
       document.head.appendChild(canonical);
       setMeta("og:url", canonical.href, true);
     }

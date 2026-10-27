@@ -1,7 +1,9 @@
 export const navigation = [
   ["/", "Home"],
   ["/noticias", "Notícias"],
+  ["/programacao", "Programação"],
   ["/programas", "Programas"],
+  ["/galeria-de-fotos", "Galeria de Fotos"],
   ["/equipe", "Equipe"],
   ["/contato", "Contato"],
   ["/institucional", "Institucional"],
@@ -9,7 +11,7 @@ export const navigation = [
 export const institutionalNavigation = [
   ["/institucional", "Sobre"],
   ["/historia-do-radio", "História do Rádio"],
-  ["/promocoes", "Política de Privacidade"],
+  ["/politica-de-privacidade", "Política de Privacidade"],
 ] as const;
 export const institutionalDetails = {
   proposal:

@@ -121,3 +121,71 @@ test("Pessoas e promoções não são inventadas", async () => {
     [],
   );
 });
+
+test("Grade e álbuns são demonstrações completas, com assets locais e IDs únicos", async () => {
+  const { schedule, scheduleDays } = await load("src/data/content/schedule.ts");
+  assert.equal(scheduleDays.length, 7);
+  assert.equal(
+    new Set(schedule.map((entry) => entry.id)).size,
+    schedule.length,
+  );
+  for (let day = 0; day < 7; day++) {
+    const entries = schedule.filter((entry) => entry.dayOfWeek === day);
+    assert.ok(entries.length > 0);
+    entries.forEach((entry) => {
+      assert.equal(entry.isDemo, true);
+      assert.match(entry.startsAt, /^\d{2}:\d{2}$/);
+      assert.ok(entry.startsAt < entry.endsAt);
+      assert.ok(entry.title.includes("exemplo"));
+    });
+  }
+  const { galleryAlbums } = await load("src/data/content/gallery.ts");
+  assert.ok(galleryAlbums.length >= 3);
+  assert.equal(
+    new Set(galleryAlbums.map((album) => album.id)).size,
+    galleryAlbums.length,
+  );
+  for (const album of galleryAlbums) {
+    assert.equal(album.isDemo, true);
+    assert.equal(album.date, null);
+    assert.ok(existsSync(`public${album.cover}`));
+    assert.ok(album.photos.length > 0);
+    assert.equal(
+      new Set(album.photos.map((photo) => photo.id)).size,
+      album.photos.length,
+    );
+    album.photos.forEach((photo) => {
+      assert.ok(photo.alt);
+      assert.ok(photo.caption);
+      assert.ok(existsSync(`public${photo.src}`));
+    });
+  }
+});
+
+test("Novas rotas têm política de noindex e a navegação não aponta para promoções", async () => {
+  const policy = JSON.parse(
+    readFileSync("src/data/content/route-policy.json", "utf8"),
+  );
+  const { navigation, institutionalNavigation } = await load(
+    "src/data/content/editorial.ts",
+  );
+  for (const route of [
+    "/programacao",
+    "/galeria-de-fotos",
+    "/politica-de-privacidade",
+  ]) {
+    assert.ok(policy.noindex.includes(route));
+    assert.ok(!policy.indexable.includes(route));
+    assert.ok(
+      [...navigation, ...institutionalNavigation].some(
+        ([url]) => url === route,
+      ),
+    );
+  }
+  assert.ok(
+    ![...navigation, ...institutionalNavigation].some(
+      ([url, label]) => url === "/promocoes" || label === "Promoções",
+    ),
+  );
+  assert.ok(!existsSync("src/pages/PromotionsPage.tsx"));
+});

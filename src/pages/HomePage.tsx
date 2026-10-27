@@ -2,7 +2,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import { HeroSection } from "../components/sections/HeroSection";
 import { RadioBarSection } from "../components/sections/RadioBarSection";
 import { NewsSection } from "../components/sections/NewsSection";
-import { SportsSection } from "../components/sections/SportsSection";
+import { RegionalNewsBanner } from "../components/sections/RegionalNewsBanner";
 import { ProgramsSection } from "../components/sections/ProgramsSection";
 import { AboutSection } from "../components/sections/AboutSection";
 import { ContactCtaSection } from "../components/sections/ContactCtaSection";
@@ -18,7 +18,7 @@ export default function HomePage() {
         <RadioBarSection />
       </div>
       <NewsSection />
-      <SportsSection />
+      <RegionalNewsBanner />
       <ProgramsSection />
       <AboutSection />
       <ContactCtaSection />
