@@ -2,26 +2,33 @@ import { useState } from "react";
 import { ArrowUpRight, ExternalLink, ImageOff } from "lucide-react";
 import type { FeedArticle, ServiceResult } from "../../types/services";
 import { formatDate } from "../../lib/services/format";
+import { useNewsLayout, type NewsLayout } from "../../hooks/useNewsLayout";
 import "../sections/feed-news.css";
 
 function FeedCard({
   article,
   featured,
+  compact,
 }: {
   article: FeedArticle;
   featured: boolean;
+  compact: boolean;
 }) {
   const [failedImage, setFailedImage] = useState(false);
   const heading = (
     <>
-      <p className="feed-meta">
-        <span>G1 Campinas e Região</span>
-        {article.sponsored && <strong>Conteúdo publicitário</strong>}
-      </p>
+      {!compact && (
+        <p className="feed-meta">
+          <span>G1 Campinas e Região</span>
+          {article.sponsored && <strong>Conteúdo publicitário</strong>}
+        </p>
+      )}
       <h3>{article.title}</h3>
-      <time dateTime={article.publishedAt}>
-        {formatDate(article.publishedAt)}
-      </time>
+      {!compact && (
+        <time dateTime={article.publishedAt}>
+          {formatDate(article.publishedAt)}
+        </time>
+      )}
     </>
   );
   return (
@@ -54,7 +61,7 @@ function FeedCard({
         </div>
         <div className="feed-copy">
           {!featured && heading}
-          <p className="feed-summary">{article.summary}</p>
+          {!compact && <p className="feed-summary">{article.summary}</p>}
           <span className="feed-read">
             Ler no G1 <ExternalLink size={15} />
           </span>
@@ -63,15 +70,25 @@ function FeedCard({
     </article>
   );
 }
-export function FeedNews({
-  result,
-  loading,
-  query = "",
-}: {
+type FeedNewsProps = {
   result: ServiceResult<FeedArticle[]> | null;
   loading: boolean;
   query?: string;
-}) {
+};
+export function FeedNews(props: FeedNewsProps) {
+  const { ref, layout } = useNewsLayout();
+  return (
+    <div ref={ref} className="feed-news" data-layout={layout}>
+      <FeedContent {...props} layout={layout} />
+    </div>
+  );
+}
+function FeedContent({
+  result,
+  loading,
+  query = "",
+  layout,
+}: FeedNewsProps & { layout: NewsLayout }) {
   if (loading)
     return (
       <div className="feed-placeholder" role="status">
@@ -107,11 +124,16 @@ export function FeedNews({
         </p>
       )}
       <div className="feed-highlights">
-        {articles.slice(0, 4).map((article, i) => (
-          <FeedCard key={article.url} article={article} featured={i === 0} />
+        {articles.slice(0, layout === "compact" ? 5 : 4).map((article, i) => (
+          <FeedCard
+            key={article.url}
+            article={article}
+            featured={layout === "wide" && i === 0}
+            compact={layout === "compact"}
+          />
         ))}
       </div>
-      {articles.length > 4 && (
+      {layout !== "compact" && articles.length > 4 && (
         <div className="feed-list" aria-label="Mais notícias do G1">
           {articles.slice(4, 10).map((article) => (
             <article key={article.url}>

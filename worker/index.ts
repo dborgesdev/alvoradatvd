@@ -1,15 +1,13 @@
 import type { Env, Storage } from "./types.ts";
 import { SharedCache } from "./cache.ts";
 import { policies } from "./sources.ts";
-import { loadNews, loadRates, loadWeather } from "./providers.ts";
+import { loadNews, loadRates } from "./providers.ts";
 
-const paths = new Set(["/api/news", "/api/rates", "/api/weather"]);
+const paths = new Set(["/api/news", "/api/rates"]);
 export class EditorialCache {
   private cache: SharedCache;
-  private env: Env;
-  constructor(state: { storage: Storage }, env: Env) {
+  constructor(state: { storage: Storage }) {
     this.cache = new SharedCache(state.storage);
-    this.env = env;
   }
   async fetch(request: Request): Promise<Response> {
     const path = new URL(request.url).pathname;
@@ -18,11 +16,7 @@ export class EditorialCache {
         ? await this.cache.get("news-v1", policies.news, loadNews)
         : path === "/api/rates"
           ? await this.cache.get("rates-v1", policies.rates, loadRates)
-          : path === "/api/weather"
-            ? await this.cache.get("weather-v1", policies.weather, () =>
-                loadWeather(this.env),
-              )
-            : null;
+          : null;
     return result
       ? Response.json(result, {
           status: result.data ? 200 : 503,

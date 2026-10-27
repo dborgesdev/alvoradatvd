@@ -12,11 +12,11 @@ pnpm dev
 Validação: `pnpm typecheck`, `pnpm lint`, `pnpm test` e `pnpm build`.
 Prévia estática: `pnpm preview`. Prévia completa com APIs: `pnpm preview:worker` (localhost:8787). Para HMR, executar também `pnpm dev`, com proxy para o Worker local.
 
-Consulte [integrações editoriais, cache e variáveis](docs/INTEGRACOES-EDITORIAIS.md). A avaliação local de clima exige `WEATHER_EVALUATION=true`; uso comercial requer chave Open-Meteo.
+Consulte [integrações editoriais, cache e variáveis](docs/INTEGRACOES-EDITORIAIS.md).
 
 ## Cloudflare Workers
 
-O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news`, `/api/rates` e `/api/weather`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
+O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news` e `/api/rates`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
 
 ```sh
 pnpm build

@@ -1,9 +1,4 @@
-import type {
-  FeedArticle,
-  Rates,
-  Weather,
-  ServiceResult,
-} from "../../types/services";
+import type { FeedArticle, Rates, ServiceResult } from "../../types/services";
 
 type Snapshot<T> = { result: ServiceResult<T> | null; loading: boolean };
 function createResource<T>(path: string, ttl: number, maxAge: number) {
@@ -74,9 +69,4 @@ export const ratesResource = createResource<Rates>(
   "/api/rates",
   1800000,
   604800000,
-);
-export const weatherResource = createResource<Weather>(
-  "/api/weather",
-  900000,
-  3600000,
 );
