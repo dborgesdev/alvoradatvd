@@ -176,17 +176,17 @@
 }
 @media (max-width: 480px) {
   [data-page="tv"] .page-intro {
-    padding-block: 25px;
+    padding-block: 16px;
   }
   [data-page="tv"] .page-intro h1 {
-    font-size: 2.3rem;
+    font-size: 2.15rem;
     margin-bottom: 14px;
   }
   [data-page="tv"] .page-intro p:not(.eyebrow) {
     font-size: 0.82rem;
   }
   [data-page="tv"] .player-layout {
-    padding-top: 30px;
+    padding-top: 24px;
   }
   .player-overlay {
     padding: 12px;

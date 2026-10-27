@@ -56,7 +56,7 @@ export function Footer() {
               {label}
             </Link>
           ))}
-          <span>Prévia V2 · Conteúdo editorial demonstrativo</span>
+          <span>Notícias: G1 Campinas e Região · Programas em confirmação</span>
         </div>
         <div className="container footer-bottom">
           <span>

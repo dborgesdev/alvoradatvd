@@ -1,6 +1,6 @@
 # Rede Alvorada
 
-Portal em React, TypeScript, Vite e Tailwind CSS. Conteúdo local, TV HLS e rádio persistente com áudio demonstrativo identificado.
+Portal em React, TypeScript, Vite e Tailwind CSS. TV HLS, rádio persistente e integrações editoriais em Cloudflare Workers.
 
 ## Desenvolvimento
 
@@ -10,11 +10,13 @@ pnpm dev
 ```
 
 Validação: `pnpm typecheck`, `pnpm lint`, `pnpm test` e `pnpm build`.
-Prévia do build: `pnpm preview`.
+Prévia estática: `pnpm preview`. Prévia completa com APIs: `pnpm preview:worker` (localhost:8787). Para HMR, executar também `pnpm dev`, com proxy para o Worker local.
+
+Consulte [integrações editoriais, cache e variáveis](docs/INTEGRACOES-EDITORIAIS.md). A avaliação local de clima exige `WEATHER_EVALUATION=true`; uso comercial requer chave Open-Meteo.
 
 ## Cloudflare Workers
 
-O Worker `alvoradatvd` publica os arquivos de `dist/`, com fallback SPA para navegação direta entre rotas.
+O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news`, `/api/rates` e `/api/weather`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
 
 ```sh
 pnpm build

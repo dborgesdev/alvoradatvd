@@ -1,5 +1,5 @@
 export const navigation = [
- ['/', 'Início'], ['/noticias', 'Notícias'], ['/programas', 'Programas'], ['/tv', 'TV ao vivo'], ['/radio', 'Rádio'], ['/institucional', 'Institucional'], ['/contato', 'Contato'],
+ ['/', 'Home'], ['/noticias', 'Notícias'], ['/programas', 'Programas'], ['/equipe', 'Equipe'], ['/contato', 'Contato'], ['/institucional', 'Institucional'],
 ] as const;
 export const institutionalNavigation = [
  ['/institucional', 'Sobre'],
