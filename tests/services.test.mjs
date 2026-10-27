@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { parseRss, plainText, safeSourceUrl } from "../worker/rss.ts";
 import { SharedCache } from "../worker/cache.ts";
-import { parseQuote, parseWeather } from "../worker/providers.ts";
+import { parseQuote } from "../worker/providers.ts";
 import worker from "../worker/index.ts";
 import { fetchLimited } from "../worker/http.ts";
 import { policies } from "../worker/sources.ts";
@@ -11,7 +11,6 @@ import { formatDate, brazilTimeZone } from "../src/lib/services/format.ts";
 const stamp = Date.parse("2026-10-27T15:00:00Z");
 test("TTLs e formatação mantêm 15/30 minutos e fuso de Brasília", () => {
   assert.equal(policies.news.ttl, 900);
-  assert.equal(policies.weather.ttl, 900);
   assert.equal(policies.rates.ttl, 1800);
   assert.equal(brazilTimeZone, "America/Sao_Paulo");
   assert.match(formatDate("2026-10-27T01:00:00Z"), /26\/10\/2026,? 22:00/);
@@ -176,7 +175,7 @@ test("Cache frio em falha não inventa dados e respeita backoff global", async (
   assert.equal(result.unavailable, true);
   assert.equal(calls, 1);
 });
-test("PTAX usa venda de fechamento e converte fuso explicitamente; clima valida valor e horário", () => {
+test("PTAX usa venda de fechamento e converte fuso explicitamente", () => {
   const quote = parseQuote(
     {
       value: [
@@ -197,21 +196,6 @@ test("PTAX usa venda de fechamento e converte fuso explicitamente; clima valida 
   assert.equal(quote.sell, 5.1234);
   assert.equal(quote.referenceAt, "2026-10-26T13:00:00.000-03:00");
   assert.throws(() => parseQuote({ value: [] }, "EUR"));
-  assert.equal(
-    parseWeather({
-      current: {
-        temperature_2m: 24.5,
-        weather_code: 1,
-        time: Math.floor(Date.now() / 1000),
-      },
-    }).location,
-    "Campinas, SP",
-  );
-  assert.throws(() =>
-    parseWeather({
-      current: { temperature_2m: null, weather_code: 1, time: 0 },
-    }),
-  );
 });
 test("Worker preserva assets, rejeita API desconhecida e não aceita URL de origem do visitante", async () => {
   let internal = "";
@@ -232,6 +216,11 @@ test("Worker preserva assets, rejeita API desconhecida e não aceita URL de orig
       await worker.fetch(new Request("https://portal.test/tv"), env)
     ).text(),
     "SPA",
+  );
+  assert.equal(
+    (await worker.fetch(new Request("https://portal.test/api/weather"), env))
+      .status,
+    404,
   );
   assert.equal(
     (await worker.fetch(new Request("https://portal.test/api/unknown"), env))
@@ -314,4 +303,14 @@ test("Relógio mantém dia, data e hora em uma linha no fuso de Brasília", asyn
     formatClock(new Date("2026-10-28T01:05:06Z")),
     "terça-feira, 27/10/2026 · 22:05:06",
   );
+});
+
+test("Layout editorial respeita a largura útil dos cards e as duas transições", async () => {
+  const { newsLayoutForWidth } = await import("../src/hooks/useNewsLayout.ts");
+  for (const width of [0, 320, 639])
+    assert.equal(newsLayoutForWidth(width), "compact");
+  for (const width of [640, 768, 1119])
+    assert.equal(newsLayoutForWidth(width), "grid");
+  for (const width of [1120, 1280, 1600])
+    assert.equal(newsLayoutForWidth(width), "wide");
 });
