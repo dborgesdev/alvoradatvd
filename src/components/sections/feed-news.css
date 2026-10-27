@@ -291,3 +291,11 @@
     transform: none;
   }
 }
+
+.news-curation-note {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  margin: -10px 0 26px;
+  max-width: 750px;
+}

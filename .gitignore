@@ -12,6 +12,7 @@ qa/
 # Materiais locais usados na construção e avaliação.
 docs/*
 !docs/ASSETS-LICENCAS.md
+!docs/project.md
 !docs/institucional-fonte.txt
 !docs/INTEGRACOES-EDITORIAIS.md
 public/assets/brand/Portal de Notícias Rede Alvorada.png

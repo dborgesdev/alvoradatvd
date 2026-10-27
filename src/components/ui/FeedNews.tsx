@@ -17,9 +17,8 @@ function FeedCard({
   const [failedImage, setFailedImage] = useState(false);
   const heading = (
     <>
-      {!compact && (
+      {!compact && article.sponsored && (
         <p className="feed-meta">
-          <span>G1 Campinas e Região</span>
           {article.sponsored && <strong>Conteúdo publicitário</strong>}
         </p>
       )}
@@ -38,6 +37,7 @@ function FeedCard({
         target="_blank"
         rel="noopener noreferrer"
         className="feed-card-link"
+        title={`Fonte original: ${article.source}`}
       >
         <div className="feed-image">
           {article.image && !failedImage ? (
@@ -63,7 +63,7 @@ function FeedCard({
           {!featured && heading}
           {!compact && <p className="feed-summary">{article.summary}</p>}
           <span className="feed-read">
-            Ler no G1 <ExternalLink size={15} />
+            Ler matéria <ExternalLink size={15} />
           </span>
         </div>
       </a>
@@ -92,21 +92,21 @@ function FeedContent({
   if (loading)
     return (
       <div className="feed-placeholder" role="status">
-        Buscando as notícias do G1 Campinas e Região…
+        Buscando as notícias da região…
       </div>
     );
   if (!result?.data)
     return (
       <div className="feed-placeholder" role="status">
         <h3>As notícias estão temporariamente indisponíveis.</h3>
-        <p>Você pode acompanhar a cobertura diretamente no portal G1.</p>
+        <p>Você pode acompanhar a cobertura diretamente no portal de origem.</p>
         <a
           className="text-link"
           href="https://g1.globo.com/sp/campinas-regiao/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Acessar G1 Campinas e Região <ArrowUpRight size={16} />
+          Abrir portal de origem <ArrowUpRight size={16} />
         </a>
       </div>
     );
@@ -134,12 +134,16 @@ function FeedContent({
         ))}
       </div>
       {layout !== "compact" && articles.length > 4 && (
-        <div className="feed-list" aria-label="Mais notícias do G1">
+        <div className="feed-list" aria-label="Mais notícias da região">
           {articles.slice(4, 10).map((article) => (
             <article key={article.url}>
-              <a href={article.url} target="_blank" rel="noopener noreferrer">
+              <a
+                href={article.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Fonte original: ${article.source}`}
+              >
                 <div className="feed-meta">
-                  <span>G1 Campinas e Região</span>
                   <time dateTime={article.publishedAt}>
                     {formatDate(article.publishedAt)}
                   </time>
@@ -159,21 +163,6 @@ function FeedContent({
           Nenhuma notícia corresponde à sua busca.
         </p>
       )}
-      <p className="feed-attribution">
-        Fonte:{" "}
-        <a
-          href="https://g1.globo.com/sp/campinas-regiao/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          G1 Campinas e Região
-        </a>
-        . Títulos, resumos e imagens fornecidos pelo RSS; direitos de seus
-        respectivos titulares. Leia as matérias completas no G1.
-        {result.updatedAt && (
-          <> Seleção consultada em {formatDate(result.updatedAt)} (Brasília).</>
-        )}
-      </p>
     </>
   );
 }

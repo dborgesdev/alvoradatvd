@@ -1,0 +1,136 @@
+.gallery-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+  margin-bottom: 34px;
+}
+.gallery-intro h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  max-width: 500px;
+  margin-bottom: 0;
+}
+.gallery-intro > p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin: 0;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+.album-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+.album-card > button {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: transparent;
+  color: var(--ink);
+}
+.album-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--navy);
+}
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s;
+}
+.album-card button:hover img {
+  transform: scale(1.04);
+}
+.album-demo {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 0.65rem;
+  background: #031326ed;
+  color: white;
+  border: 1px solid #ffffff55;
+  padding: 7px 10px;
+  border-radius: 6px;
+}
+.album-open {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--navy);
+  background: #ffb454;
+}
+.album-copy {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  flex: 1;
+}
+.album-copy h3 {
+  font-size: 1.45rem;
+  line-height: 1.25;
+}
+.album-copy > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.album-count {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #005bc5;
+  font-weight: 650;
+  font-size: 0.76rem;
+  margin-top: auto;
+  padding-top: 12px;
+}
+@media (max-width: 1000px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gallery-intro {
+    gap: 25px;
+  }
+  .album-copy {
+    padding: 22px;
+  }
+}
+@media (max-width: 640px) {
+  .gallery-grid,
+  .gallery-intro {
+    grid-template-columns: 1fr;
+  }
+  .gallery-intro {
+    gap: 20px;
+  }
+  .album-cover {
+    aspect-ratio: 16/10;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .album-cover img {
+    transition: none;
+  }
+  .album-card button:hover img {
+    transform: none;
+  }
+}

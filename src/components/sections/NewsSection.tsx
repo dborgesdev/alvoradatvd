@@ -7,11 +7,13 @@ export function NewsSection() {
   return (
     <section id="noticias" className="section container news-section">
       <SectionHeading
-        eyebrow="G1 CAMPINAS E REGIÃO"
-        title="Um olhar para a nossa região."
-        to="/noticias"
-        linkLabel="Todas as notícias"
+        eyebrow=""
+        title="Aconteceu, na Rede Alvorada virou notícia"
       />
+      {/* <p className="news-curation-note">
+        Seleção de matérias de veículos externos. A leitura completa acontece no
+        portal de origem.
+      </p> */}
       <FeedNews {...state} />
     </section>
   );

@@ -1,0 +1,12 @@
+{
+  "indexable": ["/", "/tv", "/institucional", "/historia-do-radio", "/contato"],
+  "noindex": [
+    "/radio",
+    "/noticias",
+    "/programas",
+    "/programacao",
+    "/galeria-de-fotos",
+    "/equipe",
+    "/politica-de-privacidade"
+  ]
+}

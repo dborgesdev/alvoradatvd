@@ -8,7 +8,9 @@ import RadioPage from "./pages/RadioPage";
 import ProgramsPage from "./pages/ProgramsPage";
 import InstitutionalPage from "./pages/InstitutionalPage";
 import TeamPage from "./pages/TeamPage";
-import PromotionsPage from "./pages/PromotionsPage";
+import SchedulePage from "./pages/SchedulePage";
+import GalleryPage from "./pages/GalleryPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { RadioProvider } from "./components/layout/RadioProvider";
@@ -28,7 +30,9 @@ export default function App() {
             <Route path="institucional" element={<InstitutionalPage />} />
             <Route path="historia-do-radio" element={<RadioHistoryPage />} />
             <Route path="equipe" element={<TeamPage />} />
-            <Route path="promocoes" element={<PromotionsPage />} />
+            <Route path="programacao" element={<SchedulePage />} />
+            <Route path="galeria-de-fotos" element={<GalleryPage />} />
+            <Route path="politica-de-privacidade" element={<PrivacyPage />} />
             <Route path="contato" element={<ContactPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>

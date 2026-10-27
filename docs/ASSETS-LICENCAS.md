@@ -28,3 +28,7 @@
 ## Textos
 
 `docs/institucional-fonte.txt` é a fonte primária definida pelo adendo. O PDF original não está no checkout; há também `docs/institucional-extraido-pdf.txt`. O conteúdo foi transcrito do primeiro arquivo, preservando palavras, pontuação, ordem dos parágrafos e títulos. Somente quebras de linha de impressão foram unidas; cabeçalhos, rodapés e contatos repetidos foram excluídos conforme o adendo. Quem Somos e Sobre aparecem primeiro na ordem aprovada; História do Rádio e Rádio no Brasil estão na rota própria.
+
+## Galeria demonstrativa e banner regional (27/10/2026)
+
+O banner regional reaproveita `region-v2.webp`, conceito urbano genérico já listado acima. Não representa uma ocorrência, Campinas ou Hortolândia confirmadas. A galeria de exemplos reaproveita assets locais conceituais (`region-v2.webp`, `program-v2.webp` e `studio-conceitual.webp`) e a fotografia histórica CC0 `radio-paragon-1920.jpg`, já documentada acima e com crédito e link de origem no lightbox, rotulados coletivamente e por álbum como demonstração. Não são apresentados como fotografias da emissora, equipe ou eventos reais. Não foram baixadas fotografias novas nem modificados créditos embutidos.

@@ -49,14 +49,16 @@ export function Footer() {
             ["/institucional", "Institucional"],
             ["/historia-do-radio", "História do Rádio"],
             ["/equipe", "Equipe"],
-            ["/promocoes", "Promoções"],
+            ["/programacao", "Programação"],
+            ["/galeria-de-fotos", "Galeria de Fotos"],
+            ["/politica-de-privacidade", "Política de Privacidade"],
             ["/contato", "Contato"],
           ].map(([url, label]) => (
             <Link key={url} to={url}>
               {label}
             </Link>
           ))}
-          <span>Notícias: G1 Campinas e Região · Programas em confirmação</span>
+          <span>Programação e álbuns oficiais em confirmação</span>
         </div>
         <div className="container footer-bottom">
           <span>

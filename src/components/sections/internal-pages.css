@@ -261,14 +261,6 @@
   color: var(--muted);
   font-size: 0.93rem;
 }
-[data-page="promocoes"] .pending-content {
-  background: radial-gradient(ellipse at top left, #fff1dd, white 60%);
-}
-[data-page="promocoes"] .pending-content > svg {
-  color: #a94b00;
-  background: #fff3e1;
-  border-color: #f6d7ad;
-}
 .article-page {
   max-width: 1040px;
   padding-block: 50px 70px;

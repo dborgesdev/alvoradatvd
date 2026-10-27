@@ -10,7 +10,7 @@ export function NewsListingSection() {
   return (
     <section className="section container">
       <div className="news-filters">
-        <p className="eyebrow">ÚLTIMAS DO G1 CAMPINAS E REGIÃO</p>
+        <p className="eyebrow">ACONTECE NA NOSSA REGIÃO</p>
         <label className="search-field">
           <Search size={18} />
           <span className="sr-only">Buscar notícias</span>
