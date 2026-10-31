@@ -1,7 +1,7 @@
 import type { FeedArticle, Rates, ServiceResult } from "../../types/services";
 
 type Snapshot<T> = { result: ServiceResult<T> | null; loading: boolean };
-function createResource<T>(path: string, ttl: number, maxAge: number) {
+export function createResource<T>(path: string, ttl: number, maxAge: number) {
   let snapshot: Snapshot<T> = { result: null, loading: true };
   let nextAt = 0;
   let pending: Promise<void> | null = null;
@@ -20,9 +20,9 @@ function createResource<T>(path: string, ttl: number, maxAge: number) {
       if (Date.now() < nextAt) return;
       pending = (async () => {
         try {
-          const base = import.meta.env.VITE_API_BASE_URL || "";
+          const base = import.meta.env?.VITE_API_BASE_URL || "";
           const response = await fetch(`${base}${path}`, {
-            signal: AbortSignal.timeout(15000),
+            signal: AbortSignal.timeout(30000),
             headers: { Accept: "application/json" },
           });
           const result = (await response.json()) as ServiceResult<T>;

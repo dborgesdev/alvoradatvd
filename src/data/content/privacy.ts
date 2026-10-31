@@ -29,7 +29,8 @@ export const privacySections = [
     paragraphs: [
       "As notícias são selecionadas de um RSS externo. A consulta ao feed é feita no servidor e mantém cache compartilhado por 15 minutos; as matérias completas abrem no endereço original. Imagens remotas podem ser solicitadas pelo navegador ao provedor da imagem, que recebe os dados técnicos dessa conexão.",
       "A TV utiliza transmissão HLS do provedor Taaqui. O carregamento automático e mudo do vídeo envolve conexões com esse provedor, mesmo sem ativar o som. No rádio, o arquivo de demonstração atual é servido com o site e identificado como áudio local. A reprodução e o volume não são gravados em localStorage ou cookies pelo código do portal.",
-      "Os programas acessam o canal oficial do YouTube. O componente está preparado para incorporar vídeos via youtube-nocookie.com somente quando houver IDs confirmados; os dados locais atuais não contêm esses IDs. Se incorporados futuramente, os fluxos de dados e esta política deverão ser revisados.",
+      "Os programas podem incorporar vídeos e playlists cadastrados pela emissora via youtube-nocookie.com. Carregar esses conteúdos estabelece conexões com o YouTube. Links de vídeos, playlists e redes sociais também podem abrir serviços externos.",
+      "Programas, programação, equipe e álbuns são consultados na API pública do WordPress da emissora pelo servidor, com cache editorial. As fotografias são carregadas diretamente da biblioteca de mídia do painel, que recebe os dados técnicos dessas conexões.",
       "As cotações são consultadas no Banco Central pelo servidor, com cache de 30 minutos. O visitante só acessa o site do Banco Central se selecionar o link das cotações.",
     ],
   },
@@ -45,7 +46,7 @@ export const privacySections = [
     id: "finalidades",
     title: "6. Finalidades, segurança e conservação",
     paragraphs: [
-      "Os recursos observados destinam-se a apresentar o portal, entregar mídia, exibir informações públicas e permitir contatos iniciados pelo visitante. Não há painel administrativo ou integração WordPress ativa nesta etapa.",
+      "Os recursos observados destinam-se a apresentar o portal, entregar mídia, exibir informações públicas e permitir contatos iniciados pelo visitante. A integração editorial utiliza somente conteúdo público do WordPress e não oferece login administrativo no frontend.",
       "Não foi definido um prazo de retenção para mensagens ou registros de infraestrutura. O controlador deve documentar os períodos, as bases legais aplicáveis, as medidas de proteção e os critérios de eliminação. Os prazos de cache editorial não representam prazos de retenção de dados pessoais.",
       "A página não afirma garantias absolutas de segurança ou práticas contratuais ainda não verificadas. Alterações de integrações, formulários, publicidade ou CMS exigem nova avaliação desta política.",
     ],

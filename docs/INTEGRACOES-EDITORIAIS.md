@@ -10,10 +10,15 @@ React/Vite estático e endpoints no Cloudflare Worker `alvoradatvd`. `wrangler.j
 | ------------ | ------------------------ | ------------- | ----------------------------------- |
 | `/api/news`  | RSS G1 Campinas e Região | 900 segundos  | Até 24 horas, marcada como anterior |
 | `/api/rates` | Banco Central/PTAX       | 1800 segundos | Até 7 dias, com referência temporal |
+| `/api/programs` | WordPress: programas, categorias e apresentadores | 300 segundos | Até 1 hora, com aviso de versão anterior |
+| `/api/team` | WordPress: integrantes visíveis | 300 segundos | Até 1 hora, com aviso de versão anterior |
+| `/api/albums` | WordPress: álbuns, categorias e fotografias | 300 segundos | Até 1 hora, com aviso de versão anterior |
 
 JSON: `{ data, updatedAt, stale, unavailable? }`. O frontend não recebe XML bruto ou HTML arbitrário. `updatedAt` indica a consulta; publicação e referência PTAX têm seus próprios campos. `Cache-Control: no-store` evita cache opaco adicional; o TTL é aplicado no Durable Object. Só GET e URLs de origem fixas; querystrings não fragmentam o cache. Timeout de 10 segundos e respostas limitadas (RSS 2 MB; PTAX 100 KB). Redirecionamentos são rejeitados, usando modo `manual` compatível com Workers.
 
 ## RSS e layouts
+
+A integração WordPress de 30/10/2026, seus endpoints, contratos, paginação, cache e resultados de validação estão documentados em [WORDPRESS-INTEGRACAO.md](../WORDPRESS-INTEGRACAO.md). As seções de validação abaixo registram a revisão anterior de notícias/cotações.
 
 Fonte: https://g1.globo.com/rss/g1/sp/campinas-regiao/
 

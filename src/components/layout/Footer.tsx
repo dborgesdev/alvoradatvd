@@ -58,7 +58,7 @@ export function Footer() {
               {label}
             </Link>
           ))}
-          <span>Programação e álbuns oficiais em confirmação</span>
+          <span>Rádio, TV e informação em conexão</span>
         </div>
         <div className="container footer-bottom">
           <span>

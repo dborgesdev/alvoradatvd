@@ -1,0 +1,43 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { createResource } from "../src/lib/services/client.ts";
+import { SharedCache } from "../worker/cache.ts";
+import { policies } from "../worker/sources.ts";
+
+test("Cliente editorial compartilha consulta pendente, respeita TTL e distingue falha de coleção vazia", async t => {
+  let now = Date.parse("2026-10-30T20:00:00Z");
+  t.mock.method(Date, "now", () => now);
+  let calls = 0;
+  t.mock.method(globalThis, "fetch", async () => { calls++; return Response.json({ data: [], stale: false, updatedAt: new Date(now).toISOString() }); });
+  const resource = createResource("/api/programs", 60000, 3600000);
+  assert.equal(resource.getSnapshot().loading, true);
+  await Promise.all([resource.refresh(), resource.refresh(), resource.refresh()]);
+  assert.equal(calls, 1);
+  assert.equal(resource.getSnapshot().loading, false);
+  assert.deepEqual(resource.getSnapshot().result.data, []);
+  await resource.refresh(); assert.equal(calls, 1);
+  now += 60000;
+  await resource.refresh(); assert.equal(calls, 2);
+  t.mock.method(globalThis, "fetch", async () => { throw Error("offline"); });
+  const cold = createResource("/api/programs", 60000, 3600000);
+  await cold.refresh();
+  assert.equal(cold.getSnapshot().result.unavailable, true);
+  assert.equal(cold.getSnapshot().result.data, null);
+});
+test("Cache WordPress propaga edição após 300s, mantém última versão identificada em falha e expira em uma hora", async () => {
+  const stored = new Map(); let now = Date.parse("2026-10-30T20:00:00Z"); let calls = 0;
+  const cache = new SharedCache({ get: async key => stored.get(key), put: async (key, value) => stored.set(key, value) }, () => now);
+  const load = async () => [{ title: `Edição ${++calls}` }];
+  await cache.get("wp", policies.wordpress, load);
+  now += 299000; await cache.get("wp", policies.wordpress, load);
+  assert.equal(calls, 1);
+  now += 1000;
+  assert.equal((await cache.get("wp", policies.wordpress, load)).data[0].title, "Edição 2");
+  now += 300000;
+  const failed = async () => { throw Error("offline"); };
+  const stale = await cache.get("wp", policies.wordpress, failed);
+  assert.equal(stale.stale, true);
+  assert.equal(stale.data[0].title, "Edição 2");
+  now += 3600000;
+  assert.equal((await cache.get("wp", policies.wordpress, failed)).data, null);
+});
