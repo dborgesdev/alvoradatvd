@@ -74,7 +74,7 @@ export function GalleryLightbox({
       <div className="lightbox-inner">
         <header>
           <div>
-            <p className="eyebrow">ÁLBUM DEMONSTRATIVO</p>
+            <p className="eyebrow">{album.isDemo ? "ÁLBUM DEMONSTRATIVO" : album.category || "GALERIA DE FOTOS"}</p>
             <h2 id="lightbox-title">{album.title}</h2>
           </div>
           <button
@@ -91,11 +91,12 @@ export function GalleryLightbox({
             key={photo.id}
             src={photo.src}
             alt={photo.alt}
-            width="1200"
-            height="800"
+            width={photo.width || undefined}
+            height={photo.height || undefined}
+            decoding="async"
           />
           <figcaption id="lightbox-caption">
-            {photo.caption}
+            {photo.caption || `${album.title} · Fotografia ${index + 1}`}
             {photo.sourceUrl && (
               <>
                 {" "}

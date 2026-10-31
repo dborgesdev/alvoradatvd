@@ -1,24 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Clock3, Radio, Tv } from "lucide-react";
-import { collections } from "../../lib/content/collections";
-import { scheduleDays } from "../../data/content/schedule";
+import { buildSchedule, broadcastLabels } from "../../lib/content/collections";
+import { programsResource } from "../../lib/content/resources";
+import { useService } from "../../hooks/useService";
+import { EditorialState } from "../ui/EditorialState";
+import { EditorialImage } from "../ui/EditorialImage";
+import { weekdays as scheduleDays } from "../../data/content/weekdays";
 import "./schedule.css";
 export function ScheduleSection() {
   const [day, setDay] = useState(0);
-  const entries = collections
-    .getSchedule()
+  const state = useService(programsResource);
+  const entries = buildSchedule(state.result?.data || [])
     .filter((entry) => entry.dayOfWeek === day);
   return (
     <section className="section container schedule-section">
-      <div className="demo-disclosure">
-        <span className="eyebrow">GRADE DEMONSTRATIVA</span>
-        <p>
-          Programas e horários abaixo são exemplos de organização. A grade
-          oficial está em confirmação; nenhuma faixa representa uma transmissão
-          em andamento.
-        </p>
-      </div>
+      <EditorialState {...state} emptyMessage="Nenhum programa publicado no momento." />
       <div
         className="schedule-tabs"
         role="tablist"
@@ -72,7 +69,7 @@ export function ScheduleSection() {
       >
         <div className="schedule-heading">
           <h2>{scheduleDays[day]}</h2>
-          <span>Horários ilustrativos · Brasília</span>
+          <span>Horários de Brasília · America/Sao_Paulo</span>
         </div>
         {entries.length ? (
           entries.map((entry) => (
@@ -83,20 +80,19 @@ export function ScheduleSection() {
                 <span>às {entry.endsAt}</span>
               </div>
               <div>
-                <span className="eyebrow">
-                  {entry.category}
-                  {entry.isDemo ? " · exemplo" : ""}
-                </span>
+                {entry.category && <span className="eyebrow">{entry.category}</span>}
                 <h3>{entry.title}</h3>
-                <p>{entry.description}</p>
+                {entry.broadcastType && <span className="schedule-type">{broadcastLabels[entry.broadcastType]}</span>}
+                {entry.description && <p>{entry.description}</p>}
+                {entry.note && <p>{entry.note}</p>}
+                {entry.continuation && <p>Continuação da faixa iniciada no dia anterior.</p>}
+                {entry.continuesNextDay && <p>Continua no dia seguinte.</p>}
               </div>
-              <span className="schedule-index" aria-hidden="true">
-                {String(entry.order + 1).padStart(2, "0")}
-              </span>
+              {entry.imageDetails && <EditorialImage image={entry.imageDetails} className="schedule-image" sizes="80px" />}
             </article>
           ))
         ) : (
-          <p>Programação ainda não cadastrada para este dia.</p>
+          !state.loading && state.result?.data && <p className="schedule-empty">Programação ainda não cadastrada para este dia.</p>
         )}
       </div>
       <aside className="schedule-watch">

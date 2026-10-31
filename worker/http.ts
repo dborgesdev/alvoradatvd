@@ -2,6 +2,12 @@ export async function fetchLimited(
   url: string,
   maxBytes = 2_000_000,
 ): Promise<string> {
+  return (await fetchLimitedResponse(url, maxBytes)).text;
+}
+export async function fetchLimitedResponse(
+  url: string,
+  maxBytes = 2_000_000,
+): Promise<{ text: string; headers: Headers }> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 10000);
   try {
@@ -35,7 +41,7 @@ export async function fetchLimited(
       bytes.set(chunk, offset);
       offset += chunk.length;
     }
-    return new TextDecoder().decode(bytes);
+    return { text: new TextDecoder().decode(bytes), headers: response.headers };
   } finally {
     clearTimeout(timer);
   }

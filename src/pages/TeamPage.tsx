@@ -1,10 +1,10 @@
 import { usePageMeta } from "../hooks/usePageMeta";
 import { PageIntro } from "../components/ui/PageIntro";
-import { PendingContentSection } from "../components/sections/PendingContentSection";
+import { TeamSection } from "../components/sections/TeamSection";
 export default function TeamPage() {
   usePageMeta(
     "Equipe",
-    "Conheça o espaço da equipe da Rede Alvorada. Informações em preparação.",
+    "Conheça os integrantes e profissionais da Rede Alvorada.",
   );
   return (
     <>
@@ -13,7 +13,7 @@ export default function TeamPage() {
         title="Conexão feita por pessoas."
         description="Os profissionais que dão voz e imagem à nossa comunicação."
       />
-      <PendingContentSection kind="team" />
+      <TeamSection />
     </>
   );
 }

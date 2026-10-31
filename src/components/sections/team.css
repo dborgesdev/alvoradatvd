@@ -1,0 +1,13 @@
+.team-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:26px; }
+.team-card { border:1px solid var(--line); border-radius:18px; overflow:hidden; background:white; box-shadow:var(--shadow); }
+.team-photo { aspect-ratio:1; overflow:hidden; background:var(--navy); }
+.team-photo img { width:100%; height:100%; object-fit:cover; transition:transform .25s; }
+.team-card:hover img { transform:scale(1.03); }
+.team-copy { padding:28px; }
+.team-copy h2 { font-size:1.6rem; margin-bottom:14px; overflow-wrap:anywhere; }
+.team-biography { white-space:pre-line; color:var(--muted); font-size:.9rem; line-height:1.8; overflow-wrap:anywhere; }
+.team-socials { display:flex; flex-wrap:wrap; gap:16px; margin-top:20px; }
+.team-socials a { display:inline-flex; align-items:center; gap:6px; color:#005bc5; font-size:.8rem; padding-block:8px; }
+@media(max-width:1000px) { .team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:640px) { .team-grid { grid-template-columns:1fr; } }
+@media(prefers-reduced-motion:reduce) { .team-photo img { transition:none; } .team-card:hover img { transform:none; } }

@@ -1,3 +1,4 @@
+import type { EditorialImage, BroadcastSlot } from "./editorial";
 export type ScheduleEntry = {
   id: string;
   title: string;
@@ -9,6 +10,11 @@ export type ScheduleEntry = {
   category: string;
   order: number;
   isDemo: boolean;
+  imageDetails?: EditorialImage | null;
+  broadcastType?: BroadcastSlot["type"];
+  note?: string;
+  continuation?: boolean;
+  continuesNextDay?: boolean;
 };
 export type GalleryPhoto = {
   id: string;
@@ -16,6 +22,8 @@ export type GalleryPhoto = {
   alt: string;
   caption: string;
   sourceUrl?: string;
+  width?: number;
+  height?: number;
   order: number;
 };
 export type GalleryAlbum = {
@@ -23,6 +31,8 @@ export type GalleryAlbum = {
   title: string;
   description: string;
   cover: string;
+  coverImage?: EditorialImage | null;
+  location?: string;
   date: string | null;
   category: string;
   photos: GalleryPhoto[];

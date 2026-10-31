@@ -16,7 +16,7 @@ Consulte [integrações editoriais, cache e variáveis](docs/INTEGRACOES-EDITORI
 
 ## Cloudflare Workers
 
-O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news` e `/api/rates`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
+O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news`, `/api/rates`, `/api/programs`, `/api/team` e `/api/albums`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
 
 ```sh
 pnpm build
@@ -29,6 +29,8 @@ O deploy exige autenticação prévia na conta Cloudflare (`wrangler login`). N�
 
 ## Conteúdo e licenças
 
-Os dados ficam em `src/data/content/`. Stream real de rádio, equipe, promoções, endereço e IDs individuais de vídeo aguardam confirmação. A disponibilidade do HLS depende do provedor externo.
+Programas, programação, equipe e galeria utilizam a API pública do WordPress. Configurações e textos institucionais permanecem em `src/data/content/`. Os antigos exemplos locais não são usados como fallback. Stream real de rádio e endereço ainda aguardam confirmação. Vídeos e playlists aparecem quando cadastrados no WordPress. A disponibilidade do HLS depende do provedor externo.
+
+Consulte [implementação e validação WordPress](WORDPRESS-INTEGRACAO.md) para endpoints, cache e roteiro de revisão local.
 
 Consulte [origem e licenças dos assets](docs/ASSETS-LICENCAS.md). A fonte institucional é mantida para validar a transcrição nos testes. Briefings comerciais, relatórios de construção, referências visuais e capturas de QA permanecem locais e ignorados pelo Git.

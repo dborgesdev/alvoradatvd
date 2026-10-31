@@ -88,6 +88,9 @@
   font-size: 1.45rem;
   line-height: 1.25;
 }
+.album-copy > p { white-space:pre-line; overflow-wrap:anywhere; }
+.album-card > button:disabled { cursor:default; opacity:1; }
+.album-card > button:disabled:hover img { transform:none; }
 .album-copy > p:not(.eyebrow) {
   color: var(--muted);
   font-size: 0.82rem;

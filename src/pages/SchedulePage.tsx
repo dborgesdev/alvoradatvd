@@ -4,14 +4,14 @@ import { ScheduleSection } from "../components/sections/ScheduleSection";
 export default function SchedulePage() {
   usePageMeta(
     "Programação",
-    "Explore uma demonstração da grade por dia da semana. Programas e horários oficiais aguardam confirmação.",
+    "Confira os programas e horários da Rede Alvorada por dia da semana.",
   );
   return (
     <>
       <PageIntro
         eyebrow="NO RITMO DA ALVORADA"
         title="Programação"
-        description="Uma experiência para acompanhar a emissora, dia após dia. Conheça a estrutura da futura grade oficial."
+        description="Acompanhe a emissora, dia após dia. Confira os programas e seus horários de exibição."
       />
       <ScheduleSection />
     </>

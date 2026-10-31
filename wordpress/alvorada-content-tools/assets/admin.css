@@ -1,0 +1,12 @@
+#act-gallery-ui .act-photos { display:flex; flex-wrap:wrap; gap:16px; margin-top:20px; }
+#act-gallery-ui .act-photo { display:flex; flex-direction:column; gap:8px; padding:12px; border:1px solid #c3c4c7; background:#fff; width:180px; }
+#act-gallery-ui .act-photo img { width:150px; height:150px; object-fit:contain; align-self:center; }
+#act-gallery-ui .act-drag { cursor:move; padding:4px; }
+#act-gallery-ui .act-photo-actions { display:flex; flex-wrap:wrap; gap:4px; }
+#act-schedule-ui .act-slot { border:1px solid #c3c4c7; padding:16px; margin:20px 0; }
+#act-schedule-ui legend { font-weight:600; padding:0 4px; }
+#act-schedule-ui .act-days { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:16px; }
+#act-schedule-ui .act-days label { display:flex; align-items:center; gap:4px; }
+#act-schedule-ui .act-field { display:inline-flex; flex-direction:column; gap:6px; margin:0 16px 12px 0; vertical-align:top; max-width:100%; }
+#act-schedule-ui textarea { width:300px; max-width:100%; min-height:65px; }
+#act-schedule-ui .act-overnight { font-weight:600; }

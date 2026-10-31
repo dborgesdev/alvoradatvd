@@ -2,8 +2,10 @@ import type { Env, Storage } from "./types.ts";
 import { SharedCache } from "./cache.ts";
 import { policies } from "./sources.ts";
 import { loadNews, loadRates } from "./providers.ts";
+import { loadTeam, loadPrograms, loadAlbums } from "./wordpress.ts";
+import type { ServiceResult } from "../src/types/services.ts";
 
-const paths = new Set(["/api/news", "/api/rates"]);
+const paths = new Set(["/api/news", "/api/rates", "/api/programs", "/api/team", "/api/albums"]);
 export class EditorialCache {
   private cache: SharedCache;
   constructor(state: { storage: Storage }) {
@@ -11,12 +13,22 @@ export class EditorialCache {
   }
   async fetch(request: Request): Promise<Response> {
     const path = new URL(request.url).pathname;
-    const result =
+    const result: ServiceResult<unknown> | null =
       path === "/api/news"
         ? await this.cache.get("news-v1", policies.news, loadNews)
         : path === "/api/rates"
           ? await this.cache.get("rates-v1", policies.rates, loadRates)
-          : null;
+          : path === "/api/team"
+            ? await this.cache.get("wp-team-v1", policies.wordpress, loadTeam)
+            : path === "/api/programs"
+              ? await this.cache.get("wp-programs-v1", policies.wordpress, () => loadPrograms(async () => {
+                  const team = await this.cache.get("wp-team-v1", policies.wordpress, loadTeam);
+                  if (!team.data || team.stale) throw new Error("Equipe temporariamente indisponível");
+                  return team.data;
+                }))
+              : path === "/api/albums"
+                ? await this.cache.get("wp-albums-v1", policies.wordpress, loadAlbums)
+                : null;
     return result
       ? Response.json(result, {
           status: result.data ? 200 : 503,

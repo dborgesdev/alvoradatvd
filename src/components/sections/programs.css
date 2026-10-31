@@ -1,3 +1,9 @@
+.program-grid { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:26px; }
+.program-list { display:grid; gap:26px; min-width:0; }
+.program-description { white-space:pre-line; overflow-wrap:anywhere; }
+.program-overlay .program-subtitle { color:white; font-size:1rem; font-weight:600; }
+.program-links { display:flex; flex-wrap:wrap; gap:16px; margin-top:18px; }
+.program-links a { display:inline-flex; align-items:center; gap:6px; color:#ffbd6c; font-size:.85rem; padding-block:8px; }
 .program-feature {
   position: relative;
   isolation: isolate;
@@ -55,13 +61,14 @@
   border: 0;
 }
 .youtube-panel {
-  align-self: stretch;
+  align-self: start;
   padding: 30px;
   border: 1px solid #d8e4f0;
   background: white;
   border-radius: var(--radius);
   box-shadow: 0 10px 30px #006ce805;
 }
+@media(prefers-reduced-motion:reduce) { .program-feature > img { transition:none; } .program-feature:hover > img { transform:none; } }
 .youtube-panel > svg {
   color: #dc1f26;
   width: 33px;
