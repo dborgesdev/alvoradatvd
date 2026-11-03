@@ -4,17 +4,17 @@
 
 React/Vite estático e endpoints no Cloudflare Worker `alvoradatvd`. `wrangler.jsonc` preserva `ASSETS`, fallback SPA e execução do Worker em `/api/*`. Não há servidor Node em produção.
 
-`EDITORIAL_CACHE` é um Durable Object SQLite compartilhado pelo ID `public-services-v1`. Preserva última resposta válida, reúne requisições concorrentes e aplica backoff de 60 segundos após falhas. O histórico da migração `v1-editorial-cache` deve ser mantido.
+`EDITORIAL_CACHE` é um Durable Object SQLite compartilhado pelo ID `public-services-v1`, usado **exclusivamente por notícias e cotações**. Para esses dois serviços, preserva última resposta válida, reúne requisições concorrentes e aplica backoff de 60 segundos após falhas. O histórico da migração `v1-editorial-cache` deve ser mantido. As rotas WordPress não acessam esse objeto.
 
 | Endpoint     | Fonte                    | TTL           | Última válida em falha              |
 | ------------ | ------------------------ | ------------- | ----------------------------------- |
 | `/api/news`  | RSS G1 Campinas e Região | 900 segundos  | Até 24 horas, marcada como anterior |
 | `/api/rates` | Banco Central/PTAX       | 1800 segundos | Até 7 dias, com referência temporal |
-| `/api/programs` | WordPress: programas, categorias e apresentadores | 300 segundos | Até 1 hora, com aviso de versão anterior |
-| `/api/team` | WordPress: integrantes visíveis | 300 segundos | Até 1 hora, com aviso de versão anterior |
-| `/api/albums` | WordPress: álbuns, categorias e fotografias | 300 segundos | Até 1 hora, com aviso de versão anterior |
+| `/api/programs` | WordPress: programas, categorias e apresentadores | Sem cache no Worker; 60s em memória no frontend | Sem fallback no servidor |
+| `/api/team` | WordPress: integrantes visíveis | Sem cache no Worker; 60s em memória no frontend | Sem fallback no servidor |
+| `/api/albums` | WordPress: álbuns, categorias e fotografias | Sem cache no Worker; 60s em memória no frontend | Sem fallback no servidor |
 
-JSON: `{ data, updatedAt, stale, unavailable? }`. O frontend não recebe XML bruto ou HTML arbitrário. `updatedAt` indica a consulta; publicação e referência PTAX têm seus próprios campos. `Cache-Control: no-store` evita cache opaco adicional; o TTL é aplicado no Durable Object. Só GET e URLs de origem fixas; querystrings não fragmentam o cache. Timeout de 10 segundos e respostas limitadas (RSS 2 MB; PTAX 100 KB). Redirecionamentos são rejeitados, usando modo `manual` compatível com Workers.
+JSON: `{ data, updatedAt, stale, unavailable? }`. O frontend não recebe XML bruto ou HTML arbitrário. `updatedAt` indica a consulta; publicação e referência PTAX têm seus próprios campos. `Cache-Control: no-store` evita cache opaco adicional; o TTL de notícias/cotações é aplicado no Durable Object. Para WordPress, há somente cache na origem e 60s em memória no navegador; limpar o cache REST e recarregar a página consulta imediatamente a origem. Consulte [CACHE-EDITORIAL.md](../CACHE-EDITORIAL.md). Só GET e URLs de origem fixas; querystrings não fragmentam o cache. Timeout de 10 segundos e respostas limitadas (RSS 2 MB; PTAX 100 KB). Redirecionamentos são rejeitados, usando modo `manual` compatível com Workers.
 
 ## RSS e layouts
 

@@ -1,5 +1,7 @@
 # Integração WordPress — revisão de 30/10/2026
 
+Atualização de cache em 03/11/2026: programas, equipe e álbuns não usam mais o Durable Object; somente notícias/cotações o utilizam. A política atual e o diagnóstico da grade estão em [CACHE-EDITORIAL.md](CACHE-EDITORIAL.md). Os resultados da revisão original abaixo permanecem como histórico.
+
 Implementada na branch `codex/integracao-wordpress`, sem commit, push, merge ou publicação remota. O diretório `wordpress/` da entrega anterior foi preservado. Nenhum plugin, CPT, campo ACF, taxonomia ou registro remoto foi modificado.
 
 ## Fonte verificada
@@ -29,7 +31,7 @@ Todas as páginas indicadas pelos cabeçalhos são consultadas. Uma página que 
 ## Arquivos e contratos
 
 - `worker/wordpress.ts`: consultas públicas paginadas e composição de coleções.
-- `worker/index.ts`, `worker/cache.ts`, `worker/sources.ts`: o Durable Object existente recebe os novos recursos, reutilizando armazenamento, concorrência e backoff. Sem novas migrações ou bindings.
+- `worker/index.ts`: consulta direta das coleções WordPress. `worker/cache.ts` e `worker/sources.ts`: cache do Durable Object somente para notícias/cotações. Sem novas migrações ou bindings.
 - `src/types/wordpress.ts`: contratos REST; `src/types/editorial.ts` e `src/types/collections.ts`: modelos do frontend.
 - `src/lib/content/wordpress.ts`: adaptação, texto seguro, URLs, imagens, relações, datas e faixas.
 - `src/lib/content/resources.ts`: singletons de consulta; `src/hooks/useService.ts`: atualização conforme TTL e visibilidade. Programas, Programação e home usam o mesmo `programsResource`.
@@ -47,12 +49,12 @@ As faixas usam segunda=1 até domingo=7. Uma faixa domingo `23:00–01:00` produ
 
 ## Cache e propagação
 
-- Durable Object existente: TTL **300 segundos** para programas, equipe e álbuns. Novos dados são buscados sob demanda na primeira consulta depois do TTL, sem webhook ou tarefa agendada.
-- Navegador: TTL **60 segundos**, compartilhamento de consulta em andamento e cache em memória. Não há cookies/localStorage para a integração. O hook reavalia a cada 60 segundos enquanto a página está visível.
-- Alterações normais em programas, horários e álbuns aparecem em aproximadamente **5–7 minutos** numa página aberta e visível, mais o tempo da rede. Novas navegações reutilizam a versão disponível, respeitando o TTL.
-- Nomes/visibilidade dos apresentadores têm a dependência adicional do cache de equipe usado ao montar programas. No pior alinhamento dos dois TTLs, mudanças nessa relação podem levar aproximadamente **10–12 minutos**. A página Equipe usa diretamente seu próprio TTL.
-- Falha de atualização: última resposta realmente recebida por até **uma hora**, com aviso explícito de versão anterior; depois, estado de falha. Cache frio em falha retorna `data:null`/HTTP 503; coleção vazia válida retorna `data:[]`/HTTP 200. Backoff compartilhado de 60 segundos.
-- Cabeçalho `Cache-Control: no-store` evita um terceiro cache opaco nas respostas da aplicação. CORS existente e suas origens autorizadas permanecem inalterados.
+- WordPress: cache REST administrado na origem. Seu TTL não é exposto nos cabeçalhos consultados; o operador controla sua limpeza.
+- Worker: **nenhum cache de programas/equipe/álbuns**. Cada consulta busca a origem com `cache:no-store`; o Durable Object atende apenas notícias/cotações.
+- Navegador: memória por **60 segundos**, compartilhando consultas em andamento. O hook verifica a cada minuto e ao voltar à aba visível. Um F5 descarta essa memória e consulta imediatamente. Sem cookies/localStorage/sessionStorage para os registros editoriais.
+- Atualização automática em aba visível: até **2 minutos mais a rede depois de a API REST disponibilizar a alteração**. Não há TTL adicional para resolver apresentadores no Worker. Falhas da origem/rede impedem garantir esse prazo.
+- Falha HTTP da origem retorna `data:null`/503, sem fallback no servidor; coleção vazia válida retorna `data:[]`/200. Em falha de rede sem resposta, o navegador pode preservar sua última versão real por até uma hora, identificada como anterior.
+- `Cache-Control:no-store` nas respostas e no transporte evita cache HTTP/CDN intermediário da aplicação. CORS e paginação preservados.
 
 ## Verificações executadas
 

@@ -3,8 +3,7 @@ import assert from "node:assert/strict";
 import { adaptPrograms, adaptTeam, adaptAlbums, adaptSlots, wpText, safePublicUrl, eventDate } from "../src/lib/content/wordpress.ts";
 import { buildSchedule } from "../src/lib/content/collections.ts";
 import { fetchWpCollection } from "../worker/wordpress.ts";
-import { EditorialCache } from "../worker/index.ts";
-import { policies } from "../worker/sources.ts";
+import worker from "../worker/index.ts";
 
 const member = { id: 30, slug: "autodj", status: "publish", title: { rendered: "Auto DJ" }, acf: { cargo: "DJ", exibir_site: true } };
 const program = { id: 32, slug: "24h-de-musica", status: "publish", title: { rendered: "24h de Música" }, content: { rendered: "<p>Primeiro parágrafo.</p><p>Outro parágrafo.</p>" }, acf: { subtitulo: "Música", apresentadores: [30], url_video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", url_playlist: "https://www.youtube.com/playlist?list=PL1234567890" }, "categorias-programa": [2], grade_horarios: [{ dias: [1, 2, 3, 4, 5, 6, 7], inicio: "00:00", fim: "23:59", tipo: "ao_vivo", observacao: "" }] };
@@ -92,29 +91,30 @@ test("WordPress pagina toda coleção, nunca consulta mídia individual nem segu
     assert.deepEqual(await fetchWpCollection("programas"), []);
   } finally { globalThis.fetch = original; }
 });
-test("Durable Object: programas compartilham equipe, cache quente evita WordPress, JSON vazio e falhas distintos", async () => {
-  const original = globalThis.fetch; const urls = []; const stored = new Map();
+test("WordPress ignora o Durable Object e consulta novamente programas, equipe e álbuns", async () => {
+  const original = globalThis.fetch; const urls = [];
+  const env = { ASSETS: { fetch: async () => new Response("SPA") },
+    get EDITORIAL_CACHE() { throw Error("Acesso indevido ao Durable Object"); } };
+  const request = path => worker.fetch(new Request("https://portal.test/api/" + path), env);
   try {
-    globalThis.fetch = async url => {
+    globalThis.fetch = async (url, init) => {
+      assert.equal(init.cache, "no-store");
       const path = new URL(url).pathname.split("/").pop(); urls.push(path);
       return response(path === "programas" ? [program] : path === "equipe" ? [member] : path === "categorias-programa" ? terms : []);
     };
-    const cache = new EditorialCache({ storage: { get: async key => stored.get(key), put: async (key, value) => { stored.set(key, structuredClone(value)); } } });
-    const first = await (await cache.fetch(new Request("https://internal/api/programs"))).json();
-    const second = await (await cache.fetch(new Request("https://internal/api/programs"))).json();
+    const first = await (await request("programs")).json();
+    const second = await (await request("programs")).json();
     assert.equal(first.data[0].presenters[0].name, "Auto DJ");
-    assert.deepEqual(first, second);
-    await cache.fetch(new Request("https://internal/api/team"));
-    assert.equal(urls.filter(path => path === "equipe").length, 1);
-    assert.equal(urls.filter(path => path === "programas").length, 1);
-    const empty = await cache.fetch(new Request("https://internal/api/albums"));
+    assert.deepEqual(first.data, second.data);
+    await request("team");
+    assert.equal(urls.filter(path => path === "equipe").length, 3);
+    assert.equal(urls.filter(path => path === "programas").length, 2);
+    const empty = await request("albums");
     assert.equal(empty.status, 200);
     assert.deepEqual((await empty.json()).data, []);
     globalThis.fetch = async () => { throw new Error("offline"); };
-    const cold = new EditorialCache({ storage: { get: async () => undefined, put: async () => {} } });
-    const failed = await cold.fetch(new Request("https://internal/api/albums"));
+    const failed = await request("albums");
     assert.equal(failed.status, 503);
     assert.equal((await failed.json()).data, null);
-    assert.equal(policies.wordpress.ttl, 300);
   } finally { globalThis.fetch = original; }
 });

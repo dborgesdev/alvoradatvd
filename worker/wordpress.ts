@@ -12,7 +12,7 @@ export async function fetchWpCollection<T extends { id: number }>(collection: Co
   for (let page = 1; page <= pages; page++) {
     const url = new URL(collection, wordpressApi);
     url.search = new URLSearchParams({ acf_format: "standard", _embed: "wp:featuredmedia", per_page: "100", page: String(page), orderby: "id", order: "asc", context: "view", ...(collection.startsWith("categorias-") ? {} : { status: "publish" }) }).toString();
-    const response = await fetchLimitedResponse(url.href, 10_000_000);
+    const response = await fetchLimitedResponse(url.href, 10_000_000, { cache: "no-store" });
     const data: unknown = JSON.parse(response.text);
     const pageCount = Number(response.headers.get("X-WP-TotalPages"));
     const count = Number(response.headers.get("X-WP-Total"));

@@ -16,7 +16,7 @@ Consulte [integrações editoriais, cache e variáveis](docs/INTEGRACOES-EDITORI
 
 ## Cloudflare Workers
 
-O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news`, `/api/rates`, `/api/programs`, `/api/team` e `/api/albums`. A configuração versiona o Durable Object `EDITORIAL_CACHE` e sua migração para cache persistente compartilhado.
+O Worker `alvoradatvd` serve `dist/` com fallback SPA e endpoints `/api/news`, `/api/rates`, `/api/programs`, `/api/team` e `/api/albums`. O Durable Object `EDITORIAL_CACHE` atende **somente notícias e cotações**. Programas, equipe e álbuns consultam o WordPress diretamente, sem cache intermediário no Worker/CDN; o frontend mantém essas coleções em memória por 60 segundos. Limpe o cache REST do WordPress e recarregue a página para uma consulta imediata. Consulte [cache e atualização da grade](CACHE-EDITORIAL.md).
 
 ```sh
 pnpm build

@@ -157,7 +157,7 @@ test("Cache reúne requisições concorrentes, preserva última válida e limita
   now += 86400000;
   assert.equal((await cache.get("n", policy, fail)).data, null);
 });
-test("Cache frio em falha não inventa dados e respeita backoff global", async () => {
+test("Cache frio em falha não inventa dados e respeita backoff no mesmo cache", async () => {
   const storage = memory();
   let calls = 0;
   const load = async () => {
@@ -197,19 +197,14 @@ test("PTAX usa venda de fechamento e converte fuso explicitamente", () => {
   assert.equal(quote.referenceAt, "2026-10-26T13:00:00.000-03:00");
   assert.throws(() => parseQuote({ value: [] }, "EUR"));
 });
-test("Worker preserva assets, rejeita API desconhecida e não aceita URL de origem do visitante", async () => {
-  let internal = "";
+test("Worker sem bindings preserva assets e não aceita URL de origem ou cache do visitante", async t => {
+  const upstream = [];
+  t.mock.method(globalThis, "fetch", async url => {
+    upstream.push(String(url));
+    return Response.json([], { headers: { "X-WP-Total": "0", "X-WP-TotalPages": "0" } });
+  });
   const env = {
     ASSETS: { fetch: async () => new Response("SPA") },
-    EDITORIAL_CACHE: {
-      idFromName: () => "one",
-      get: () => ({
-        fetch: async (request) => {
-          internal = request.url;
-          return Response.json({ data: [] });
-        },
-      }),
-    },
   };
   assert.equal(
     await (
@@ -237,23 +232,24 @@ test("Worker preserva assets, rejeita API desconhecida e não aceita URL de orig
     405,
   );
   await worker.fetch(
-    new Request("https://portal.test/api/news?url=http://private"),
+    new Request("https://portal.test/api/programs?url=http://private"),
     env,
   );
-  assert.equal(internal, "https://services.internal/api/news");
+  assert.ok(upstream.length > 0);
+  assert.ok(upstream.every(url => new URL(url).origin === "https://painel.alvoradatvd.com"));
+  assert.ok(upstream.every(url => !url.includes("private")));
 });
 
-test("CORS libera somente a origem HTTPS explicitamente configurada", async () => {
+test("CORS libera somente a origem HTTPS explicitamente configurada", async t => {
+  t.mock.method(globalThis, "fetch", async () => Response.json([], {
+    headers: { "X-WP-Total": "0", "X-WP-TotalPages": "0" },
+  }));
   const env = {
     FRONTEND_ORIGIN: "https://portal.example",
     ASSETS: { fetch: async () => new Response("SPA") },
-    EDITORIAL_CACHE: {
-      idFromName: () => "one",
-      get: () => ({ fetch: async () => Response.json({ data: [] }) }),
-    },
   };
   const allowed = await worker.fetch(
-    new Request("https://backend.example/api/news", {
+    new Request("https://backend.example/api/team", {
       headers: { Origin: "https://portal.example" },
     }),
     env,
@@ -263,7 +259,7 @@ test("CORS libera somente a origem HTTPS explicitamente configurada", async () =
     "https://portal.example",
   );
   const denied = await worker.fetch(
-    new Request("https://backend.example/api/news", {
+    new Request("https://backend.example/api/team", {
       headers: { Origin: "https://outro.example" },
     }),
     env,

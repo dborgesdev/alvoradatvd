@@ -7,11 +7,13 @@ export async function fetchLimited(
 export async function fetchLimitedResponse(
   url: string,
   maxBytes = 2_000_000,
+  options: Pick<RequestInit, "cache"> = {},
 ): Promise<{ text: string; headers: Headers }> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(url, {
+      ...options,
       signal: controller.signal,
       redirect: "manual",
       headers: {
