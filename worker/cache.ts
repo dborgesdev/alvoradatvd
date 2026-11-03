@@ -58,7 +58,7 @@ export class SharedCache {
             ? `${error.name}: ${error.message.replace(/https?:\/\/\S+/g, "[url]")}`
             : "UnknownError",
         );
-        // Backoff compartilhado também em cache frio, sem expor erro/credenciais do provedor.
+        // Backoff compartilhado para notícias/cotações, inclusive em cache frio.
         await this.storage.put(key + ":retry", now + 60000);
       }
     }

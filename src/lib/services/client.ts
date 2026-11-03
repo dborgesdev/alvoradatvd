@@ -22,6 +22,7 @@ export function createResource<T>(path: string, ttl: number, maxAge: number) {
         try {
           const base = import.meta.env?.VITE_API_BASE_URL || "";
           const response = await fetch(`${base}${path}`, {
+            cache: "no-store",
             signal: AbortSignal.timeout(30000),
             headers: { Accept: "application/json" },
           });

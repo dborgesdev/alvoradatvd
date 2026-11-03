@@ -10,12 +10,17 @@ export function useService<T>(resource: Resource<T>) {
     resource.getSnapshot,
   );
   useEffect(() => {
+    const refreshVisible = () => {
+      if (document.visibilityState === "visible") void resource.refresh();
+    };
     void resource.refresh();
     // O cliente respeita o TTL; este tick também permite reavaliar após falhas sem loops agressivos.
-    const timer = setInterval(() => {
-      if (document.visibilityState === "visible") void resource.refresh();
-    }, 60000);
-    return () => clearInterval(timer);
+    const timer = setInterval(refreshVisible, 60000);
+    document.addEventListener("visibilitychange", refreshVisible);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", refreshVisible);
+    };
   }, [resource]);
   return snapshot;
 }
