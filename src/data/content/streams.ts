@@ -1,10 +1,7 @@
 export const streams = {
   radio: {
     title: "Rádio Alvorada",
-    url: null as string | null,
-    demoUrl: "/assets/audio/radio-demo.mp3",
-    demoSource: "Pixabay — free for use (informado pelo cliente)",
-    status: "pending" as const,
+    url: "https://s02.taaqui.org:9164/stream",
   },
   tv: {
     title: "Alvorada TV ao vivo",

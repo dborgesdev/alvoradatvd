@@ -4,10 +4,10 @@ import { RadioContext } from "../../lib/radio-context";
 import { useRadioPlayer } from "../../hooks/useRadioPlayer";
 export function RadioProvider({ children }: { children: ReactNode }) {
   const config = content.streams.radio;
-  const url = config.url || config.demoUrl;
+  const url = config.url;
   const { ref, ...player } = useRadioPlayer(url);
   return (
-    <RadioContext.Provider value={{ ...player, isDemo: !config.url }}>
+    <RadioContext.Provider value={player}>
       <audio
         ref={ref}
         src={url || undefined}

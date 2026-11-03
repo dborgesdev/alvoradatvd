@@ -3,7 +3,7 @@ export const privacySections = [
     id: "escopo",
     title: "1. Sobre esta política",
     paragraphs: [
-      "Esta minuta descreve os recursos observados na versão atual do portal Rede Alvorada. Está em revisão e não substitui a validação das informações pelo responsável pelo tratamento antes da publicação definitiva.",
+      "Esta política descreve os recursos observados no portal Rede Alvorada e sua relação com os dados dos visitantes.",
       "A identificação jurídica do controlador, o endereço aplicável e a designação do responsável pelo atendimento de privacidade ainda precisam ser confirmados. Não foram presumidos razão social, CNPJ ou endereço a partir de documentos divergentes.",
     ],
   },
@@ -28,7 +28,7 @@ export const privacySections = [
     title: "4. Notícias, imagens e players",
     paragraphs: [
       "As notícias são selecionadas de um RSS externo. A consulta ao feed é feita no servidor e mantém cache compartilhado por 15 minutos; as matérias completas abrem no endereço original. Imagens remotas podem ser solicitadas pelo navegador ao provedor da imagem, que recebe os dados técnicos dessa conexão.",
-      "A TV utiliza transmissão HLS do provedor Taaqui. O carregamento automático e mudo do vídeo envolve conexões com esse provedor, mesmo sem ativar o som. No rádio, o arquivo de demonstração atual é servido com o site e identificado como áudio local. A reprodução e o volume não são gravados em localStorage ou cookies pelo código do portal.",
+      "A TV utiliza transmissão HLS do provedor Taaqui. O carregamento automático e mudo do vídeo envolve conexões com esse provedor, mesmo sem ativar o som. A rádio utiliza o streaming oficial da emissora, também fornecido pela Taaqui; a conexão de áudio é iniciada mediante interação do visitante. A reprodução e o volume não são gravados em localStorage ou cookies pelo código do portal.",
       "Os programas podem incorporar vídeos e playlists cadastrados pela emissora via youtube-nocookie.com. Carregar esses conteúdos estabelece conexões com o YouTube. Links de vídeos, playlists e redes sociais também podem abrir serviços externos.",
       "Programas, programação, equipe e álbuns são consultados na API pública do WordPress da emissora pelo servidor, com cache editorial. As fotografias são carregadas diretamente da biblioteca de mídia do painel, que recebe os dados técnicos dessas conexões.",
       "As cotações são consultadas no Banco Central pelo servidor, com cache de 30 minutos. O visitante só acessa o site do Banco Central se selecionar o link das cotações.",
@@ -56,7 +56,7 @@ export const privacySections = [
     title: "7. Seus direitos",
     paragraphs: [
       "A LGPD prevê direitos que incluem confirmação do tratamento, acesso, correção de dados, informações sobre compartilhamento, anonimização, bloqueio ou eliminação nas hipóteses legais, portabilidade conforme regulamentação, informação sobre consentimento e sua revogação quando aplicável. A análise de cada pedido depende das condições previstas na lei.",
-      "O canal específico para exercer esses direitos e a identificação do responsável pelo atendimento estão pendentes de confirmação. Enquanto esta minuta é avaliada, a página Contato disponibiliza os canais gerais informados pela emissora; eles ainda não são apresentados como canal formal de privacidade.",
+      "O canal específico para exercer esses direitos e a identificação do responsável pelo atendimento estão pendentes de confirmação. A página Contato disponibiliza os canais gerais informados pela emissora; eles ainda não são apresentados como canal formal de privacidade.",
     ],
   },
   {
@@ -64,7 +64,7 @@ export const privacySections = [
     title: "8. Validações antes da publicação definitiva",
     paragraphs: [
       "Confirmar: identificação e contato do controlador; responsável e canal de privacidade; bases legais por finalidade; procedimentos para pedidos de titulares; conservação e eliminação de mensagens/registros; contratos com provedores; mecanismos de segurança e armazenamento; eventual transferência internacional; versão e data de vigência da política.",
-      "Esta minuta será atualizada após a validação. A data de vigência ainda não foi definida.",
+      "As informações pendentes serão atualizadas após sua confirmação. A data de vigência ainda não foi definida.",
     ],
   },
 ];

@@ -12,9 +12,9 @@
 
 - Arquivo fornecido pelo cliente: `public/assets/audio/radio-demo.mp3`.
 - Origem/licença declaradas pelo cliente em 20/10/2026: **“pixabay free for use”**.
-- O player o identifica como demonstração local, sem afirmar transmissão ao vivo.
+- Material histórico da prévia de 20/10/2026, retirado dos assets públicos em 03/11/2026. Não é mais utilizado pelo player nem como fallback.
 - Não foi fornecido o link da faixa nem um certificado individual de licença. Guardar essa referência junto aos materiais de publicação; não foi realizada verificação independente de autoria/licença do MP3.
-- Stream oficial continua nulo e tem precedência sobre a demo quando configurado em `src/data/content/streams.ts`.
+- Desde 03/11/2026, `src/data/content/streams.ts` contém exclusivamente a transmissão oficial fornecida pelo cliente: `https://s02.taaqui.org:9164/stream`.
 
 ## Fotografia para História do Rádio
 

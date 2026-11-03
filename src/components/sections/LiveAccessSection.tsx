@@ -22,7 +22,7 @@ export function LiveAccessSection() {
             <Radio />
           </span>
           <div>
-            <div className="mini-label muted">STREAM EM CONFIRMAÇÃO</div>
+            <div className="mini-label muted">TRANSMISSÃO OFICIAL</div>
             <h2>Rádio Alvorada</h2>
             <p>A sua companhia está por aqui.</p>
           </div>

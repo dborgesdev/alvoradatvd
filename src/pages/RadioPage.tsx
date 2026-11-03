@@ -4,7 +4,7 @@ import { RadioPlayerSection } from "../components/sections/RadioPlayerSection";
 export default function RadioPage() {
   usePageMeta(
     "Rádio",
-    "Rádio Alvorada. A transmissão de áudio aguarda confirmação do serviço de streaming.",
+    "Ouça a transmissão oficial da Rádio Alvorada: música, informação e boas conversas.",
   );
   return (
     <>

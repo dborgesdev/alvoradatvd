@@ -1,8 +1,6 @@
 import { RadioControls } from "../ui/RadioControls";
-import { useRadio } from "../../hooks/useRadio";
 import { Waveform } from "../ui/Waveform";
 export function RadioPlayerSection() {
-  const { isDemo } = useRadio();
   return (
     <section className="section container">
       <div className="radio-player">
@@ -23,9 +21,7 @@ export function RadioPlayerSection() {
             que conecta.
           </h2>
           <p>
-            {isDemo
-              ? "Experimente o player com um áudio local de demonstração. Este áudio não é a programação ao vivo da emissora."
-              : "Acompanhe a transmissão oficial da Rádio Alvorada."}
+            Acompanhe a transmissão oficial da Rádio Alvorada. Toque em Play para ouvir.
           </p>
         </div>
       </div>
