@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import routePolicy from "../data/content/route-policy.json";
+import socialImage from "../data/content/social-image.json";
 export function usePageMeta(title: string, description: string) {
   useEffect(() => {
     document.title = `${title} | Rede Alvorada`;
@@ -24,9 +25,16 @@ export function usePageMeta(title: string, description: string) {
     setMeta("og:type", "website", true);
     setMeta(
       "og:image",
-      new URL("/assets/brand/og-alvorada.svg", origin || window.location.origin)
-        .href,
+      new URL(socialImage.path, origin || socialImage.previewOrigin).href,
       true,
+    );
+    setMeta("og:image:width", String(socialImage.width), true);
+    setMeta("og:image:height", String(socialImage.height), true);
+    setMeta("og:image:type", socialImage.mimeType, true);
+    setMeta("twitter:card", "summary_large_image");
+    setMeta(
+      "twitter:image",
+      new URL(socialImage.path, origin || socialImage.previewOrigin).href,
     );
     setMeta("twitter:title", document.title);
     setMeta("twitter:description", description);
