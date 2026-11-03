@@ -100,8 +100,7 @@ export function ScheduleSection() {
           <p className="eyebrow">A CONEXÃO CONTINUA</p>
           <h2>Escolha a sua tela. Ou dê o play.</h2>
           <p>
-            Acesse os players da emissora. O rádio utiliza áudio demonstrativo
-            enquanto o stream oficial está em confirmação.
+            Acesse os players da emissora para acompanhar a rádio e a TV.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">

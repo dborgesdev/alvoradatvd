@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { MediaStatus } from "../types/content";
+import { createRadioPlayer } from "../lib/radio-player";
 export function useRadioPlayer(url: string | null) {
   const ref = useRef<HTMLAudioElement>(null);
+  const controller = useRef<ReturnType<typeof createRadioPlayer> | null>(null);
   const [status, setStatus] = useState<MediaStatus>(
     url ? "idle" : "unavailable",
   );
@@ -9,47 +11,17 @@ export function useRadioPlayer(url: string | null) {
   useEffect(() => {
     const audio = ref.current;
     if (!audio) return;
-    const playing = () => setStatus("playing");
-    const paused = () => setStatus("paused");
-    const ended = () => setStatus("idle");
-    const loading = () => setStatus("loading");
-    const error = () => setStatus("error");
-    const volumeChanged = () => updateVolume(audio.volume);
-    const events = {
-      playing,
-      pause: paused,
-      ended,
-      waiting: loading,
-      error,
-      volumechange: volumeChanged,
-    };
-    Object.entries(events).forEach(([name, listener]) =>
-      audio.addEventListener(name, listener),
-    );
-    audio.volume = 0.65;
+    controller.current = createRadioPlayer(audio, setStatus, updateVolume);
     return () => {
-      Object.entries(events).forEach(([name, listener]) =>
-        audio.removeEventListener(name, listener),
-      );
-      audio.pause();
+      controller.current?.dispose();
+      controller.current = null;
     };
   }, [url]);
   const toggle = useCallback(() => {
-    const audio = ref.current;
-    if (!audio || !url) return;
-    if (!audio.paused) {
-      audio.pause();
-      return;
-    }
-    if (audio.error) audio.load();
-    setStatus("loading");
-    void audio.play().catch((error: unknown) => {
-      if (error instanceof DOMException && error.name === "AbortError") return;
-      setStatus("error");
-    });
+    if (url) controller.current?.toggle();
   }, [url]);
   const setVolume = useCallback((value: number) => {
-    if (ref.current) ref.current.volume = Math.max(0, Math.min(1, value));
+    controller.current?.setVolume(value);
   }, []);
   return { ref, status, toggle, volume, setVolume, available: Boolean(url) };
 }

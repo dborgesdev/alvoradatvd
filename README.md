@@ -29,7 +29,7 @@ O deploy exige autenticação prévia na conta Cloudflare (`wrangler login`). N�
 
 ## Conteúdo e licenças
 
-Programas, programação, equipe e galeria utilizam a API pública do WordPress. Configurações e textos institucionais permanecem em `src/data/content/`. Os antigos exemplos locais não são usados como fallback. Stream real de rádio e endereço ainda aguardam confirmação. Vídeos e playlists aparecem quando cadastrados no WordPress. A disponibilidade do HLS depende do provedor externo.
+Programas, programação, equipe e galeria utilizam a API pública do WordPress. Configurações e textos institucionais permanecem em `src/data/content/`. Os antigos exemplos locais não são usados como fallback. A rádio usa exclusivamente `https://s02.taaqui.org:9164/stream`, mediante Play do visitante. Endereço ainda aguarda confirmação. Vídeos e playlists aparecem quando cadastrados no WordPress. A disponibilidade das transmissões depende do provedor externo.
 
 Consulte [implementação e validação WordPress](WORDPRESS-INTEGRACAO.md) para endpoints, cache e roteiro de revisão local.
 

@@ -11,7 +11,7 @@ import { useRadio } from "../../hooks/useRadio";
 import { Waveform } from "./Waveform";
 import "./radio.css";
 export function RadioControls({ compact = false }: { compact?: boolean }) {
-  const { status, toggle, volume, setVolume, available, isDemo } = useRadio();
+  const { status, toggle, volume, setVolume, available } = useRadio();
   const id = useId();
   const playing = status === "playing" || status === "loading";
   const labels = {
@@ -35,7 +35,7 @@ export function RadioControls({ compact = false }: { compact?: boolean }) {
         <div>
           <strong>Rádio Alvorada</strong>
           <span className="radio-mode">
-            {isDemo ? "DEMONSTRAÇÃO · ÁUDIO LOCAL" : "TRANSMISSÃO OFICIAL"}
+            TRANSMISSÃO OFICIAL
           </span>
         </div>
       </div>
@@ -57,7 +57,6 @@ export function RadioControls({ compact = false }: { compact?: boolean }) {
       <div className="radio-state">
         <Radio size={15} />
         <span role="status">{labels[status]}</span>
-        {isDemo && <small>Exemplo de áudio · não é programação ao vivo</small>}
       </div>
       <label className="radio-volume" htmlFor={id}>
         {volume === 0 ? <VolumeX size={19} /> : <Volume2 size={19} />}

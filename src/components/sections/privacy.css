@@ -26,22 +26,6 @@
 .privacy-nav nav a:hover {
   color: #005bc5;
 }
-.privacy-draft {
-  padding: 25px;
-  border-left: 3px solid var(--orange);
-  background: #fff2de;
-  color: #654315;
-  border-radius: 0 12px 12px 0;
-  margin-bottom: 34px;
-}
-.privacy-draft strong {
-  font-size: 1.1rem;
-}
-.privacy-draft p {
-  font-size: 0.87rem;
-  line-height: 1.8;
-  margin: 10px 0 0;
-}
 .privacy-article {
   padding: 8px 0 28px;
   border-bottom: 1px solid var(--line);
@@ -86,8 +70,5 @@
   }
   .privacy-article h2 {
     font-size: 1.4rem;
-  }
-  .privacy-draft {
-    padding: 22px;
   }
 }

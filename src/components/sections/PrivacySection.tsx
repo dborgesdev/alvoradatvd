@@ -20,14 +20,6 @@ export function PrivacySection() {
         </Link>
       </aside>
       <div>
-        <div className="privacy-draft">
-          <strong>Minuta para validação</strong>
-          <p>
-            Documento baseado nos recursos atuais do portal. Identificação do
-            controlador, canal de privacidade e demais campos indicados devem
-            ser confirmados antes da publicação definitiva.
-          </p>
-        </div>
         {privacySections.map((section) => (
           <article className="privacy-article" id={section.id} key={section.id}>
             <h2>{section.title}</h2>

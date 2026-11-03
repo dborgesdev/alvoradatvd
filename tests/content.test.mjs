@@ -19,11 +19,11 @@ test("Editorial demonstrativo não anuncia datas ou imagens ausentes", async () 
     assert.ok(article.body.length);
   }
 });
-test("Rádio fica sem URL e YouTube não contém IDs inventados", async () => {
+test("Rádio usa exclusivamente o stream oficial e exemplos de YouTube não inventam IDs", async () => {
   const { streams } = await load("src/data/content/streams.ts");
   const { programs } = await load("src/data/content/programs.ts");
-  assert.equal(streams.radio.url, null);
-  assert.ok(existsSync(`public${streams.radio.demoUrl}`));
+  assert.equal(streams.radio.url, "https://s02.taaqui.org:9164/stream");
+  assert.equal("demoUrl" in streams.radio, false);
   assert.ok(streams.tv.hlsUrl.startsWith("https://"));
   programs.forEach((program) => assert.equal(program.youtubeVideoId, null));
 });
