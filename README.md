@@ -34,3 +34,9 @@ Programas, programação, equipe e galeria utilizam a API pública do WordPress.
 Consulte [implementação e validação WordPress](WORDPRESS-INTEGRACAO.md) para endpoints, cache e roteiro de revisão local.
 
 Consulte [origem e licenças dos assets](docs/ASSETS-LICENCAS.md). A fonte institucional é mantida para validar a transcrição nos testes. Briefings comerciais, relatórios de construção, referências visuais e capturas de QA permanecem locais e ignorados pelo Git.
+
+## Imagem de compartilhamento
+
+`public/og-image.webp` é o arquivo fornecido para compartilhamento, preservado sem conversão ou redimensionamento (1536 × 1024 px). A configuração em `src/data/content/social-image.json` centraliza URL da prévia, caminho, dimensões e MIME. O Vite injeta as tags Open Graph/Twitter no HTML inicial, e `usePageMeta` mantém a mesma referência ao navegar. Não há dependência de JavaScript para obter a imagem no compartilhamento.
+
+A origem social padrão é `https://alvoradatvd.smartlocal.workers.dev`; a configuração existente `VITE_PUBLIC_SITE_URL` tem precedência quando um domínio público for confirmado. Não é necessário definir essa variável para a prévia, preservando a política atual de indexação. O deploy manual pode partir de uma branch validada com `pnpm exec wrangler deploy`, sem merge obrigatório na main. Rastreadores podem manter cache próprio de compartilhamentos; a validação deve considerar o HTML HTTP e a imagem publicada.
